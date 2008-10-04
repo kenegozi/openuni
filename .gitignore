@@ -1,0 +1,26 @@
+# Lines starting with '#' are considered comments.
+build
+bin
+obj
+*.pdb
+*.suo
+*.csproj.user
+*.resharper
+*.resharper.user
+_ReSharper*
+log4net.config
+#Web.config
+#web.config
+logFile.txt
+#App.config
+#app.config
+ClientBin
+log.txt
+nhibernateLog.txt
+nhibernateSqlLog.txt
+system.net.trace.log
+warningsLog.txt
+*Publish.xml
+*.sln.cache
+.svn
+Log

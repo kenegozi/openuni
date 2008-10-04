@@ -1,0 +1,4 @@
+2008-09-28 16:20:36,412 [13] DEBUG NHibernate.SQL [(null)] - select department0_.Id as Id1_, department0_.Name as Name1_ from Departments department0_ order by  department0_.Name
+2008-09-28 16:21:05,286 [13] DEBUG NHibernate.SQL [(null)] - select department0_.Id as Id1_, department0_.Name as Name1_ from Departments department0_ order by  department0_.Name
+2008-09-28 16:22:04,593 [13] DEBUG NHibernate.SQL [(null)] - select department0_.Id as Id1_, department0_.Name as Name1_ from Departments department0_ order by  department0_.Name
+2008-09-28 16:23:01,062 [13] DEBUG NHibernate.SQL [(null)] - select department0_.Id as Id1_, department0_.Name as Name1_ from Departments department0_ order by  department0_.Name

@@ -1,0 +1,1 @@
+..\..\..\tools\codegenerator\Castle.Tools.CodeGenerator.CmdLine.exe /P:"%CD%\.." /ProjectFileName:OpenUni.Web.UI.csproj /ViewExtensions:aspx /OutputFileName:SiteMaps\SiteMap.MonoRail.generated.cs

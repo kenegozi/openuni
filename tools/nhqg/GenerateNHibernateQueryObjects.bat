@@ -1,0 +1,1 @@
+NHQG /Lang:CS /InputFilePattern:../../src/MusicGlue.Domain/bin/Debug/MusicGlue.Domain.dll /OutputDirectory:../../src/MusicGlue.Domain/Query /BaseNamespace:MusicGlue.Domain.Query /single:+
