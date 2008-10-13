@@ -15,7 +15,7 @@
 	<h3>קורסים:</h3>
 	
 	<%foreach (var module in view.Modules) {%>
-		<a href="~/module/<%=module.Id %>/<%=module.Name %>"><%=module.Name %></a><br />
+		<a href="~<%=Routes.ModuleById(module.Id,module.Name) %>"><%=module.Name %></a><br />
 	<%} %>
 	
 </div>

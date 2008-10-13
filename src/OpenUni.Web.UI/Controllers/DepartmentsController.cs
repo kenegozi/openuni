@@ -18,15 +18,12 @@ namespace OpenUni.Web.UI.Controllers
 		[StaticRoute("Departments", "departments")]
 		public void Index()
 		{
-			LayoutPropertyBag.Departments = departmentsRepository.FindAll();
 		}
 
-		[PatternRoute("Department", "department/<departmentName:string>")]
+		[PatternRoute("DepartmentByName", "departments/<departmentName>")]
 		public void Show(string departmentName)
 		{
-			LayoutPropertyBag.Departments = departmentsRepository.FindAll();
-
-			var view = DictionaryAdapterFactory.GetAdapter<IDepartmentShowView>(PropertyBag);
+			var view = Typed<IDepartmentShowView>();
 			view.Department = departmentsRepository.FindByName(departmentName);
 
 		}

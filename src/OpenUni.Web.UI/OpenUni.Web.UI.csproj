@@ -105,12 +105,16 @@
     <Content Include="Static\js\jquery\jqmodal\jqModal.js" />
     <Content Include="Static\js\jquery\jquery-1.2.6.min.js" />
     <Content Include="Static\styles\default.css" />
-    <Content Include="Views\Departments\Show.aspx" />
     <Content Include="Views\Departments\Index.aspx" />
+    <Content Include="Views\Departments\Show.aspx" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Layouts\Default.aspx" />
     <Content Include="Views\Modules\Index.aspx" />
+    <Content Include="Views\Modules\Show.aspx" />
+    <Content Include="Views\People\Profiles\Professor.aspx" />
+    <Content Include="Views\People\Profiles\StaffMember.aspx" />
+    <Content Include="Views\People\Profiles\Person.aspx" />
     <Content Include="Views\SqlLog\View.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -120,22 +124,43 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\ModulesController.cs" />
+    <Compile Include="Controllers\People\Areas.cs" />
+    <Compile Include="Controllers\People\ProfilesController.cs" />
     <Compile Include="Controllers\SqlLogController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Filters\DefaultLayoutCommonFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiteMaps\SiteMap.MonoRail.generated.cs" />
-    <Compile Include="Views\Departments\IDepartmentShowView.cs" />
-    <Compile Include="Views\Home\IIndexView.cs" />
-    <Compile Include="Views\ISiteAwareView.cs" />
-    <Compile Include="Views\Layouts\Layouts.cs" />
-    <Compile Include="Views\Modules\IIndexView.cs" />
-    <Compile Include="Views\View.cs" />
-    <Compile Include="Views\Layouts\IDefaultLayout.cs" />
+    <Compile Include="Views\Departments\IDepartmentShowView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Home\IIndexView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\ISiteAwareView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Layouts\IDefaultLayout.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Layouts\Layouts.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\IIndexView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Modules\IModuleView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\People\Profiles\IShowProfileView.cs" />
+    <Compile Include="Views\View.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SiteMaps\GenerateMonorailSiteMap.bat" />

@@ -1,32 +1,33 @@
 using Castle.MonoRail.Framework;
 using Castle.Tools.CodeGenerator.External;
-using OpenUni.Domain.Departments;
 using OpenUni.Domain.Modules;
 using OpenUni.Web.UI.Views.Layouts;
 using OpenUni.Web.UI.Views.Modules;
 
-namespace OpenUni.Web.UI.Controllers
+namespace OpenUni.Web.UI.Controllers.People
 {
 	[Layout(Layouts.DEFAULT)]
 	public partial class ModulesController : AbstractController
 	{
 		private readonly IModulesRepository modulesRepository;
-		private readonly IDepartmentsRepository departmentsRepository;
-		public ModulesController(IModulesRepository modulesRepository, IDepartmentsRepository departmentsRepository)
+		public ModulesController(IModulesRepository modulesRepository)
 		{
 			this.modulesRepository = modulesRepository;
-			this.departmentsRepository = departmentsRepository;
 		}
 
 		[StaticRoute("Modules", "modules")]
 		public void Index([DataBind("filter")] ModuleSpecification specification)
 		{
-			LayoutPropertyBag.Departments = departmentsRepository.FindAll();
-
-			var view = DictionaryAdapterFactory.GetAdapter<IIndexView>(PropertyBag);
+			var view = Typed<IIndexView>();
 			view.Modules = modulesRepository.FindBy(specification);
 			view.Filter = specification;
+		}
 
+		[PatternRoute("ModuleById", "modules/<moduleId:int>/<moduleName>")]
+		public void Show(int moduleId)
+		{
+			var view = Typed<IModuleView>();
+			view.Module = modulesRepository.Get(moduleId);
 		}
 	}
 }

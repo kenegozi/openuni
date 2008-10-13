@@ -1,15 +1,14 @@
 using System;
+using System.Text;
 using Castle.ActiveRecord;
+using OpenUni.Domain.Extensions;
 
 namespace OpenUni.Domain.People
 {
 	[ActiveRecord, JoinedBase]
 	public class Person
 	{
-		public Person()
-		{
-			Address = new AddressInfo();
-		}
+		protected AddressInfo address= new AddressInfo();
 
 		[PrimaryKey(PrimaryKeyType.GuidComb)]
 		public virtual Guid Id { get; protected set; }
@@ -18,40 +17,33 @@ namespace OpenUni.Domain.People
 		public virtual int ICN { get; set; }
 
 		[Property]
+		public virtual string Title { get; set; }
+
+		[Property]
 		public virtual string FirstName { get; set; }
 
 		[Property]
 		public virtual string LastName { get; set; }
 
-		[Nested]
-		public virtual AddressInfo Address { get; private set; }
+		private const string FULL_NAME_FORMAT = "{0} {1}";
+		private const string FULL_NAME_WITH_TITLE_FORMAT = "{2} {0} {1}";
 
-	}
-
-	[ActiveRecord]
-	public class StaffMember : Person
-	{
-		//public StaffMember():base(){}
-
-		public virtual void SetKey(Guid id)
-		{
-			Id = id;
-		}
-
-		[JoinedKey]
-		public override Guid Id
+		public virtual string FullName
 		{
 			get
 			{
-				return base.Id;
+				var format = Title.IsNullOrEmpty()
+					? FULL_NAME_FORMAT
+					: FULL_NAME_WITH_TITLE_FORMAT;
+
+				return format.Apply(FirstName, LastName, Title);
 			}
 		}
 
-		[Property]
-		public virtual string Bio { get; set; }
-		[Property]
-		public virtual Guid DepartmentId{ get; set; }
-
+		[Nested(Access = PropertyAccess.NosetterCamelcase)]
+		public virtual AddressInfo Address
+		{
+			get { return address; }
+		}
 	}
-
 }

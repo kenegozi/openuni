@@ -57,7 +57,7 @@
     <Compile Include="Repositories\AbstractActiveRecordBasedRepository.cs" />
     <Compile Include="Repositories\ModulesRepository.cs" />
     <Compile Include="Repositories\DepartmentsRepository.cs" />
-    <Compile Include="Repositories\StudentsRepository.cs" />
+    <Compile Include="Repositories\PeopleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

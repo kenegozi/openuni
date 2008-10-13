@@ -59,6 +59,8 @@ namespace OpenUni.Web.UI
 			container.Register(
 				AllTypes.Of<SmartDispatcherController>().
 					FromAssembly(typeof(HomeController).Assembly),
+				AllTypes.Of<IFilter>().
+					FromAssembly(typeof(HomeController).Assembly),
 				AllTypes.Of<ViewComponent>().FromAssembly(typeof(Global).Assembly)
 					.Configure(reg=>reg.Named(reg.ServiceType.Name))
             );
@@ -77,7 +79,8 @@ namespace OpenUni.Web.UI
 
 			container.Register(
 				Component.For<IDepartmentsRepository>().ImplementedBy<DepartmentsRepository>().LifeStyle.Singleton,
-				Component.For<IModulesRepository>().ImplementedBy<ModulesRepository>().LifeStyle.Singleton
+				Component.For<IModulesRepository>().ImplementedBy<ModulesRepository>().LifeStyle.Singleton,
+				Component.For<IPeopleRepository>().ImplementedBy<PeopleRepository>().LifeStyle.Singleton
 				);
 		}
 

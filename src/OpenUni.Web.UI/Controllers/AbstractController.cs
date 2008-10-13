@@ -1,12 +1,14 @@
 using Castle.Components.DictionaryAdapter;
 using Castle.MonoRail.Framework;
 using Castle.Tools.CodeGenerator.External;
+using OpenUni.Web.UI.Filters;
 using OpenUni.Web.UI.SiteMap;
 using OpenUni.Web.UI.Views;
 using OpenUni.Web.UI.Views.Layouts;
 
 namespace OpenUni.Web.UI.Controllers
 {
+	[Filter(ExecuteWhen.AfterAction, typeof(DefaultLayoutCommonFilter))]
 	public abstract class AbstractController : SmartDispatcherController
 	{
 		public IDictionaryAdapterFactory DictionaryAdapterFactory
@@ -22,6 +24,27 @@ namespace OpenUni.Web.UI.Controllers
 		}
 		protected RootAreaNode Site;
 
+		/// <summary>
+		/// Provides typed access to the property bag
+		/// </summary>
+		/// <typeparam name="T">Interface through with an access to the property bag is
+		/// needed</typeparam>
+		/// <returns>A typed wrapper around PropertyBag of type T</returns>
+		public T Typed<T>()
+		{
+			return DictionaryAdapterFactory.GetAdapter<T>(PropertyBag);
+		}
+
+		/// <summary>
+		/// Provides typed access to the flash
+		/// </summary>
+		/// <typeparam name="T">Interface through with an access to the flash is
+		/// needed</typeparam>
+		/// <returns>A typed wrapper around flash of type T</returns>
+		public T Flashed<T>()
+		{
+			return DictionaryAdapterFactory.GetAdapter<T>(Flash);
+		}
 
 		protected Routes Routes{ get; private set;}
 

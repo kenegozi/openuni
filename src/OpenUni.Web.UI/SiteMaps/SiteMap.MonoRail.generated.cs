@@ -72,7 +72,7 @@ namespace OpenUni.Web.UI.SiteMap {
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public virtual Castle.Tools.CodeGenerator.External.IControllerActionReference Index(OpenUni.Domain.Modules.ModuleSpecification specification) {
-            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.ModulesController), "", "Modules", "Index", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.ModulesController), "Index", new System.Type[] {
+            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.People.ModulesController), "", "Modules", "Index", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.People.ModulesController), "Index", new System.Type[] {
                             typeof(OpenUni.Domain.Modules.ModuleSpecification)}), new Castle.Tools.CodeGenerator.External.ActionArgument[] {
                         new Castle.Tools.CodeGenerator.External.ActionArgument(0, "specification", typeof(OpenUni.Domain.Modules.ModuleSpecification), specification)});
         }
@@ -80,8 +80,22 @@ namespace OpenUni.Web.UI.SiteMap {
         // Empty argument Action... Not sure if we want to pass MethodInformation to these...
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public virtual Castle.Tools.CodeGenerator.External.IArgumentlessControllerActionReference Index() {
-            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.ModulesController), "", "Modules", "Index", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.ModulesController), "Index", new System.Type[] {
+            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.People.ModulesController), "", "Modules", "Index", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.People.ModulesController), "Index", new System.Type[] {
                             typeof(OpenUni.Domain.Modules.ModuleSpecification)}), new Castle.Tools.CodeGenerator.External.ActionArgument[0]);
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerActionReference Show(int moduleId) {
+            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.People.ModulesController), "", "Modules", "Show", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.People.ModulesController), "Show", new System.Type[] {
+                            typeof(int)}), new Castle.Tools.CodeGenerator.External.ActionArgument[] {
+                        new Castle.Tools.CodeGenerator.External.ActionArgument(0, "moduleId", typeof(int), moduleId)});
+        }
+        
+        // Empty argument Action... Not sure if we want to pass MethodInformation to these...
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IArgumentlessControllerActionReference Show() {
+            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.People.ModulesController), "", "Modules", "Show", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.People.ModulesController), "Show", new System.Type[] {
+                            typeof(int)}), new Castle.Tools.CodeGenerator.External.ActionArgument[0]);
         }
     }
     
@@ -110,6 +124,30 @@ namespace OpenUni.Web.UI.SiteMap {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPeopleProfilesControllerActionNode {
+        
+        protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
+        
+        public RootPeopleProfilesControllerActionNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
+            this._services = services;
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerActionReference Show(System.Guid personId) {
+            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.People.ProfilesController), "People", "Profiles", "Show", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.People.ProfilesController), "Show", new System.Type[] {
+                            typeof(System.Guid)}), new Castle.Tools.CodeGenerator.External.ActionArgument[] {
+                        new Castle.Tools.CodeGenerator.External.ActionArgument(0, "personId", typeof(System.Guid), personId)});
+        }
+        
+        // Empty argument Action... Not sure if we want to pass MethodInformation to these...
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IArgumentlessControllerActionReference Show() {
+            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.People.ProfilesController), "People", "Profiles", "Show", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.People.ProfilesController), "Show", new System.Type[] {
+                            typeof(System.Guid)}), new Castle.Tools.CodeGenerator.External.ActionArgument[0]);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
     public partial class RootDepartmentsControllerRouteNode {
         
         protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
@@ -132,11 +170,11 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         /// <summary>
-        /// department/&lt;departmentName:string&gt;
+        /// departments/&lt;departmentName&gt;
         /// </summary>
-        public static DepartmentRoute Department {
+        public static DepartmentByNameRoute DepartmentByName {
             get {
-                return ((DepartmentRoute)(new DepartmentRoute().DefaultForArea().Is("").DefaultForController().Is<OpenUni.Web.UI.Controllers.DepartmentsController>().DefaultForAction().Is("Show")));
+                return ((DepartmentByNameRoute)(new DepartmentByNameRoute().DefaultForArea().Is("").DefaultForController().Is<OpenUni.Web.UI.Controllers.DepartmentsController>().DefaultForAction().Is("Show")));
             }
         }
         
@@ -168,11 +206,29 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         /// <summary>
+        /// modules/&lt;moduleId:int&gt;/&lt;moduleName&gt;
+        /// </summary>
+        public static ModuleByIdRoute ModuleById {
+            get {
+                return ((ModuleByIdRoute)(new ModuleByIdRoute().DefaultForArea().Is("").DefaultForController().Is<OpenUni.Web.UI.Controllers.People.ModulesController>().DefaultForAction().Is("Show").Restrict(ModuleByIdRoute.RequiredParameters.moduleId).ValidInteger));
+            }
+        }
+        
+        /// <summary>
         /// sql-log/&lt;requestId:number&gt;
         /// </summary>
         public static SqlLogRoute SqlLog {
             get {
                 return ((SqlLogRoute)(new SqlLogRoute().DefaultForArea().Is("").DefaultForController().Is<OpenUni.Web.UI.Controllers.SqlLogController>().DefaultForAction().Is("View")));
+            }
+        }
+        
+        /// <summary>
+        /// people/&lt;personId:guid&gt;
+        /// </summary>
+        public static ProfileByPersonIdRoute ProfileByPersonId {
+            get {
+                return ((ProfileByPersonIdRoute)(new ProfileByPersonIdRoute().DefaultForArea().Is("People").DefaultForController().Is<OpenUni.Web.UI.Controllers.People.ProfilesController>().DefaultForAction().Is("Show").Restrict(ProfileByPersonIdRoute.RequiredParameters.personId).ValidGuid));
             }
         }
         
@@ -185,14 +241,16 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-        public partial class DepartmentRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
+        public partial class DepartmentByNameRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
             
-            public DepartmentRoute() : 
-                    base("Department", "department/<departmentName>") {
+            public DepartmentByNameRoute() : 
+                    base("DepartmentByName", "departments/<departmentName>") {
             }
             
             [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
             public partial class RequiredParameters {
+                
+                public const string departmentName = "departmentName";
             }
             
             [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
@@ -225,6 +283,26 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+        public partial class ModuleByIdRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
+            
+            public ModuleByIdRoute() : 
+                    base("ModuleById", "modules/<moduleId>/<moduleName>") {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class RequiredParameters {
+                
+                public const string moduleId = "moduleId";
+                
+                public const string moduleName = "moduleName";
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class OptionalParameters {
+            }
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
         public partial class SqlLogRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
             
             public SqlLogRoute() : 
@@ -233,6 +311,24 @@ namespace OpenUni.Web.UI.SiteMap {
             
             [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
             public partial class RequiredParameters {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class OptionalParameters {
+            }
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+        public partial class ProfileByPersonIdRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
+            
+            public ProfileByPersonIdRoute() : 
+                    base("ProfileByPersonId", "people/<personId>") {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class RequiredParameters {
+                
+                public const string personId = "personId";
             }
             
             [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
@@ -258,11 +354,12 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         /// <summary>
-        /// department/&lt;departmentName:string&gt;
+        /// departments/&lt;departmentName&gt;
         /// </summary>
-        public virtual string Department() {
+        public virtual string DepartmentByName(string departmentName) {
             System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
-            return RouteDefinitions.Department.CreateUrl(routeParameters);
+            routeParameters.Add("departmentName", departmentName);
+            return RouteDefinitions.DepartmentByName.CreateUrl(routeParameters);
         }
         
         /// <summary>
@@ -287,11 +384,30 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         /// <summary>
+        /// modules/&lt;moduleId:int&gt;/&lt;moduleName&gt;
+        /// </summary>
+        public virtual string ModuleById(int moduleId, string moduleName) {
+            System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
+            routeParameters.Add("moduleId", moduleId);
+            routeParameters.Add("moduleName", moduleName);
+            return RouteDefinitions.ModuleById.CreateUrl(routeParameters);
+        }
+        
+        /// <summary>
         /// sql-log/&lt;requestId:number&gt;
         /// </summary>
         public virtual string SqlLog() {
             System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
             return RouteDefinitions.SqlLog.CreateUrl(routeParameters);
+        }
+        
+        /// <summary>
+        /// people/&lt;personId:guid&gt;
+        /// </summary>
+        public virtual string ProfileByPersonId(System.Guid personId) {
+            System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
+            routeParameters.Add("personId", personId);
+            return RouteDefinitions.ProfileByPersonId.CreateUrl(routeParameters);
         }
     }
     
@@ -321,6 +437,16 @@ namespace OpenUni.Web.UI.SiteMap {
         protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
         
         public RootSqlLogControllerRouteNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
+            this._services = services;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPeopleProfilesControllerRouteNode {
+        
+        protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
+        
+        public RootPeopleProfilesControllerRouteNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
             this._services = services;
         }
     }
@@ -385,7 +511,14 @@ namespace OpenUni.Web.UI.SiteMap {
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public virtual Castle.Tools.CodeGenerator.External.IControllerViewReference Index {
             get {
-                return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.ModulesController), "", "Modules", "Index");
+                return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.People.ModulesController), "", "Modules", "Index");
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerViewReference Show {
+            get {
+                return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.People.ModulesController), "", "Modules", "Show");
             }
         }
     }
@@ -408,6 +541,37 @@ namespace OpenUni.Web.UI.SiteMap {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPeopleProfilesControllerViewNode {
+        
+        protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
+        
+        public RootPeopleProfilesControllerViewNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
+            this._services = services;
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerViewReference Person {
+            get {
+                return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.People.ProfilesController), "People", "Profiles", "Person");
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerViewReference Professor {
+            get {
+                return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.People.ProfilesController), "People", "Profiles", "Professor");
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerViewReference StaffMember {
+            get {
+                return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.People.ProfilesController), "People", "Profiles", "StaffMember");
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
     public partial class RootAreaNode {
         
         protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
@@ -420,12 +584,15 @@ namespace OpenUni.Web.UI.SiteMap {
         
         private RootSqlLogControllerNode _sqlLog;
         
+        private RootPeopleAreaNode _people;
+        
         public RootAreaNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
             this._services = services;
             this._departments = new RootDepartmentsControllerNode(this._services);
             this._home = new RootHomeControllerNode(this._services);
             this._modules = new RootModulesControllerNode(this._services);
             this._sqlLog = new RootSqlLogControllerNode(this._services);
+            this._people = new RootPeopleAreaNode(this._services);
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -453,6 +620,13 @@ namespace OpenUni.Web.UI.SiteMap {
         public virtual RootSqlLogControllerNode SqlLog {
             get {
                 return this._sqlLog;
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual RootPeopleAreaNode People {
+            get {
+                return this._people;
             }
         }
     }
@@ -544,6 +718,48 @@ namespace OpenUni.Web.UI.SiteMap {
             }
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPeopleAreaNode {
+        
+        protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
+        
+        private RootPeopleProfilesControllerNode _profiles;
+        
+        public RootPeopleAreaNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
+            this._services = services;
+            this._profiles = new RootPeopleProfilesControllerNode(this._services);
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual RootPeopleProfilesControllerNode Profiles {
+            get {
+                return this._profiles;
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPeopleProfilesControllerNode : RootPeopleProfilesControllerActionNode {
+        
+        public RootPeopleProfilesControllerNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) : 
+                base(services) {
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual RootPeopleProfilesControllerViewNode Views {
+            get {
+                return new RootPeopleProfilesControllerViewNode(this._services);
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual RootPeopleProfilesControllerActionNode Actions {
+            get {
+                return this;
+            }
+        }
+    }
 }
 namespace OpenUni.Web.UI.Controllers {
     using System;
@@ -614,6 +830,42 @@ namespace OpenUni.Web.UI.Controllers {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class SqlLogController {
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual OpenUni.Web.UI.SiteMap.RootSqlLogControllerNode MyActions {
+            get {
+                return new OpenUni.Web.UI.SiteMap.RootSqlLogControllerNode(this.CodeGeneratorServices);
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual OpenUni.Web.UI.SiteMap.RootSqlLogControllerViewNode MyViews {
+            get {
+                return new OpenUni.Web.UI.SiteMap.RootSqlLogControllerViewNode(this.CodeGeneratorServices);
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual OpenUni.Web.UI.SiteMap.RootSqlLogControllerRouteNode MyRoutes {
+            get {
+                return new OpenUni.Web.UI.SiteMap.RootSqlLogControllerRouteNode(this.CodeGeneratorServices);
+            }
+        }
+        
+        protected override void PerformGeneratedInitialize() {
+            base.PerformGeneratedInitialize();
+            this.PropertyBag["MyViews"] = this.MyViews;
+            this.PropertyBag["MyActions"] = this.MyActions;
+            this.PropertyBag["MyRoutes"] = this.MyRoutes;
+        }
+    }
+}
+namespace OpenUni.Web.UI.Controllers.People {
+    using System;
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
     public partial class ModulesController {
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -646,26 +898,26 @@ namespace OpenUni.Web.UI.Controllers {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-    public partial class SqlLogController {
+    public partial class ProfilesController {
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public virtual OpenUni.Web.UI.SiteMap.RootSqlLogControllerNode MyActions {
+        public virtual OpenUni.Web.UI.SiteMap.RootPeopleProfilesControllerNode MyActions {
             get {
-                return new OpenUni.Web.UI.SiteMap.RootSqlLogControllerNode(this.CodeGeneratorServices);
+                return new OpenUni.Web.UI.SiteMap.RootPeopleProfilesControllerNode(this.CodeGeneratorServices);
             }
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public virtual OpenUni.Web.UI.SiteMap.RootSqlLogControllerViewNode MyViews {
+        public virtual OpenUni.Web.UI.SiteMap.RootPeopleProfilesControllerViewNode MyViews {
             get {
-                return new OpenUni.Web.UI.SiteMap.RootSqlLogControllerViewNode(this.CodeGeneratorServices);
+                return new OpenUni.Web.UI.SiteMap.RootPeopleProfilesControllerViewNode(this.CodeGeneratorServices);
             }
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public virtual OpenUni.Web.UI.SiteMap.RootSqlLogControllerRouteNode MyRoutes {
+        public virtual OpenUni.Web.UI.SiteMap.RootPeopleProfilesControllerRouteNode MyRoutes {
             get {
-                return new OpenUni.Web.UI.SiteMap.RootSqlLogControllerRouteNode(this.CodeGeneratorServices);
+                return new OpenUni.Web.UI.SiteMap.RootPeopleProfilesControllerRouteNode(this.CodeGeneratorServices);
             }
         }
         

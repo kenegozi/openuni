@@ -5,44 +5,52 @@ using OpenUni.Domain.People;
 namespace OpenUni.Domain.Modules
 {
 	[ActiveRecord]
+	[Import(typeof(ModuleInfo), "ModuleInfo")]
 	public class Module
 	{
+		private int id;
+		private string name;
+		private ModuleTypes moduleType;
+
 		protected Module()
 		{
 		}
 
-		public Module(int id, string name, Department department, int points, ModuleTypes moduleType, StaffMember director)
+		public Module(int id, string name, ModuleTypes moduleType)
 		{
-			Id = id;
-			Name = name;
-			Department = department;
-			Points = points;
-			ModuleType = moduleType;
-			Director = director;
+			this.id = id;
+			this.name = name;
+			this.moduleType = moduleType;
 		}
 
-		[PrimaryKey(PrimaryKeyType.Assigned)]
-		public virtual int Id { get; private set;}
+		[PrimaryKey(PrimaryKeyType.Assigned, Access = PropertyAccess.NosetterCamelcase)]
+		public virtual int Id
+		{
+			get { return id; }
+		}
+
+		[Property(Access = PropertyAccess.NosetterCamelcase)]
+		public virtual string Name
+		{
+			get { return name; }
+		}
 
 		[Property]
-		public virtual string Name { get; private set;}
+		public virtual string Description { get; set; }
 
 		[BelongsTo("DepartmentId")]
-		public virtual Department Department { get; private set;}
-
-		[Property]
-		public virtual int Points { get; set;}
+		public virtual Department Department { get; private set; }
 
 		// DEMO: demonstrating the use of an Enum, mapped to a custom string
-		[Property(ColumnType = "D9.NHibernate.UserTypes.DescribedEnumStringType`1[[OpenUni.Domain.Modules.ModuleTypes, OpenUni.Domain]], D9.NHibernate")]
-		public virtual ModuleTypes ModuleType { get; private set; }
-		
-		[BelongsTo("DirectorId")]
-		public virtual StaffMember Director { get; private set;}
-
-		public virtual void AssignNewDirector(StaffMember newDirector)
+		[Property(
+			ColumnType = "D9.NHibernate.UserTypes.DescribedEnumStringType`1[[OpenUni.Domain.Modules.ModuleTypes, OpenUni.Domain]], D9.NHibernate",
+			Access = PropertyAccess.NosetterCamelcase)]
+		public virtual ModuleTypes ModuleType
 		{
-			Director = newDirector;
+			get { return moduleType; }
 		}
+
+		[BelongsTo("DirectorId")]
+		public virtual StaffMember Director { get; set; }
 	}
 }
