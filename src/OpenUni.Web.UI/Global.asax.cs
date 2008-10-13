@@ -17,8 +17,11 @@ using Castle.MonoRail.Views.AspView;
 using Castle.MonoRail.WindsorExtension;
 using Castle.Tools.CodeGenerator.External;
 using Castle.Windsor;
+using D9.Commons;
 using OpenUni.Domain.Departments;
 using OpenUni.Domain.Impl.Repositories;
+using OpenUni.Domain.Modules;
+using OpenUni.Domain.People;
 using OpenUni.Web.UI.Controllers;
 using OpenUni.Web.UI.SiteMap;
 using System.Linq;
@@ -35,6 +38,8 @@ namespace OpenUni.Web.UI
 			container = new WindsorContainer();
 			container.AddFacility("MonoRailFacility", new MonoRailFacility());
 			container.AddFacility("LoggingFacility", new LoggingFacility(LoggerImplementation.Log4net));
+
+			Enums.Initialise(typeof(Student).Assembly);
 
 			RegisterComponents();
 
@@ -71,7 +76,8 @@ namespace OpenUni.Web.UI
 				Component.For<IRoutingEngine>().Instance(RoutingModuleEx.Engine));
 
 			container.Register(
-				Component.For<IDepartmentsRepository>().ImplementedBy<DepartmentsRepository>().LifeStyle.Singleton
+				Component.For<IDepartmentsRepository>().ImplementedBy<DepartmentsRepository>().LifeStyle.Singleton,
+				Component.For<IModulesRepository>().ImplementedBy<ModulesRepository>().LifeStyle.Singleton
 				);
 		}
 

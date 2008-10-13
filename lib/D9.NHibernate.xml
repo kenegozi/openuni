@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>D9.NHibernate</name>
+    </assembly>
+    <members>
+        <member name="T:D9.NHibernate.UserTypes.DescribedEnumStringType`1">
+            <summary>
+            <c>NHibernate</c> type representing an enum that should be persisted using it's
+            <see cref="T:System.ComponentModel.DescriptionAttribute"/> values
+            </summary>
+            <typeparam name="T">The enum type</typeparam>
+        </member>
+        <member name="M:D9.NHibernate.UserTypes.DescribedEnumStringType`1.#ctor">
+            <summary>
+            <c>NHibernate</c> type representing an enum that should be persisted using it's
+            <see cref="T:System.ComponentModel.DescriptionAttribute"/> values
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>D9.Commons</name>
+    </assembly>
+    <members>
+        <member name="T:D9.Commons.Internal.DescribedEnumHandler">
+            <summary>
+            Used to cache enum values descriptions mapper
+            </summary>
+        </member>
+        <member name="M:D9.Commons.Internal.DescribedEnumHandler.#ctor(System.Type)">
+            <summary>
+            Creates a new DescribedEnumHandler instance for a given enum type
+            </summary>
+            <param name="type">The enum type</param>
+        </member>
+        <member name="M:D9.Commons.Internal.DescribedEnumHandler.GetDescriptionFrom(System.Enum)">
+            <summary>
+            Extracts the description for the given enum value.
+            <remarks>if no description was set for the given value, it's name will be retrieved</remarks>
+            </summary>
+            <param name="value">The enum value</param>
+            <returns>The value's description</returns>
+        </member>
+        <member name="M:D9.Commons.Internal.DescribedEnumHandler.GetValueFrom(System.String)">
+            <summary>
+            Parse the given string and return the enum value for with the given string acts as description
+            </summary>
+            <param name="description">The given description</param>
+            <returns>A matching enum value</returns>
+        </member>
+        <member name="T:D9.Commons.Enums">
+            <summary>
+            Provide access to enum helpers
+            </summary>
+        </member>
+        <member name="M:D9.Commons.Enums.Initialise(System.Reflection.Assembly[])">
+            <summary>
+            Initialises enum types to be used with the <see cref="T:D9.Commons.Enums"></see>
+            </summary>
+            <param name="assemblies">The assemblies to grab described enums from</param>
+        </member>
+        <member name="M:D9.Commons.Enums.Initialise(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+            <summary>
+            Initialises enum types to be used with the <see cref="T:D9.Commons.Enums"></see>
+            </summary>
+            <param name="assemblies">The assemblies to grab described enums from</param>
+        </member>
+        <member name="M:D9.Commons.Enums.Initialise(System.Type[])">
+            <summary>
+            Initialises enum types to be used with the <see cref="T:D9.Commons.Enums"></see>
+            </summary>
+            <param name="enumTypes">The enum types to initialise</param>
+        </member>
+        <member name="M:D9.Commons.Enums.Initialise(System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            Initialises enum types to be used with the <see cref="T:D9.Commons.Enums"></see>
+            </summary>
+            <param name="enumTypes">The enum types to initialise</param>
+        </member>
+        <member name="M:D9.Commons.Enums.GetDescriptionOf(System.Object)">
+            <summary>
+            Extract the description for a given enum value
+            </summary>
+            <param name="value">An enum value</param>
+            <returns>It's description, or it's name if there's no registered description for the given value</returns>
+        </member>
+        <member name="M:D9.Commons.Enums.ToEnum``1(System.String)">
+            <summary>
+            Gets the enum value for a given description or value
+            </summary>
+            <typeparam name="T">The enum type</typeparam>
+            <param name="stringValue">The enum value or description</param>
+            <returns>An enum value matching the given string value, as description (using <see cref="T:System.ComponentModel.DescriptionAttribute"/>) or as value</returns>
+        </member>
+    </members>
+</doc>

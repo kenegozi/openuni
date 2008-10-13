@@ -1,11 +1,9 @@
 ﻿using System;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework.Config;
+using D9.Commons;
 using NHibernate;
-using NHibernate.Criterion;
 using NUnit.Framework;
-using NUnit.Framework.ExtensionMethods;
-using OpenUni.Domain.Impl.Repositories;
 using OpenUni.Domain.Modules;
 using OpenUni.Domain.People;
 // ReSharper disable AccessToStaticMemberViaDerivedType
@@ -16,6 +14,13 @@ namespace OpenUni.Domain.Impl.Tests
 	public class StudentRepositoryTest
 	{
 		private ISession session;
+
+		[TestFixtureSetUp]
+		public void TestFixtureSetUp()
+		{
+			Enums.Initialise(typeof(Student).Assembly);
+		}
+
 		[SetUp]
 		public void SetUp()
 		{
@@ -43,10 +48,6 @@ where
 		[Test]
 		public void Lazy()
 		{
-			ActiveRecordStarter.Initialize(typeof (Student).Assembly, ActiveRecordSectionHandler.Instance);
-
-			var session = ActiveRecordMediator.GetSessionFactoryHolder().CreateSession(typeof(Student));
-
 			var s = session.CreateQuery("from Student s where s.LastName = :name")
 				.SetParameter("name", "אגוזי")
 				.List<Student>();
@@ -62,7 +63,6 @@ where
 		[Test]
 		public void Discriminator()
 		{
-
 			var rs = session.CreateQuery("from Assignment r")
 				.List<Requirement>();
 
@@ -77,7 +77,7 @@ where
 		public void GetNonStaffPeople()
 		{
 			var ps = session.CreateQuery("from Person p where p.class <> StaffMember")
-//				.SetParameter("personType", typeof(StaffMember))
+				//				.SetParameter("personType", typeof(StaffMember))
 				.SetMaxResults(10)
 				.List<Person>();
 
@@ -125,5 +125,17 @@ where
 			Console.WriteLine(p.GetType());
 			*/
 		}
+
+		[Test]
+		public void Modules()
+		{
+			var m = session.CreateQuery("from Module m order by Id")
+				.SetMaxResults(1) 
+				.UniqueResult<Module>();
+
+			Console.WriteLine("[{0}]: {1} / {2}", m.Id, m.ModuleType, m.Director.Id);
+
+		}
+
 	}
 }

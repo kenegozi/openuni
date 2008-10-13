@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{565DC891-2A00-41C4-AFDE-618A21338577}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -52,12 +52,19 @@
     <Compile Include="City.cs" />
     <Compile Include="Departments\Department.cs" />
     <Compile Include="Departments\IDepartmentsRepository.cs" />
+    <Compile Include="Modules\IModulesRepository.cs" />
+    <Compile Include="Modules\Module.cs" />
+    <Compile Include="Modules\ModuleSpecification.cs" />
+    <Compile Include="Modules\ModuleTypes.cs" />
     <Compile Include="Modules\Requirement.cs" />
     <Compile Include="People\AddressInfo.cs" />
     <Compile Include="People\Person.cs" />
     <Compile Include="People\Student.cs" />
     <Compile Include="People\IStudentsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Specifications\AbstractPagingAwareSpecification.cs" />
+    <Compile Include="Specifications\IPagingAwareSpecification.cs" />
+    <Compile Include="Specifications\ISpecification.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A038415C-B56D-490A-9277-C01E1E7A8111}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Criteria\ModuleSearchCriteria.cs" />
+    <Compile Include="Repositories\AbstractActiveRecordBasedRepository.cs" />
+    <Compile Include="Repositories\ModulesRepository.cs" />
     <Compile Include="Repositories\DepartmentsRepository.cs" />
     <Compile Include="Repositories\StudentsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

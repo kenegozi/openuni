@@ -26,6 +26,7 @@
 							<%} %>
 							</ul>
 						</li>
+						<li><a href="~/modules">קורסים</a></li>
 					</ul>
 				</div>
 			</div>
