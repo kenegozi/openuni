@@ -9,5 +9,13 @@ namespace OpenUni.Domain.Impl.Repositories
 		{
 			return Session.Get<Person>(id);
 		}
+
+		public Person GetByUsername(string username)
+		{
+			return Session
+				.CreateQuery("from Person p where p.Username = :username")
+				.SetString("username", username)
+				.UniqueResult<Person>();
+		}
 	}
 }

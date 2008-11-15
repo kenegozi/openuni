@@ -1,10 +1,34 @@
 ﻿/* reset */
-html, body, div, p, h1, h2, h3, h4, h5, h6, ul, li
+html, body, div, p, h1, h2, h3, h4, h5, h6, ul, ol, li
 {
 	margin	: 0;
 	padding	: 0;
 	position: relative;
+}
+*
+{
 	font-family : Tahoma, Arial;
+	font-size	: 13px;
+}
+
+h6 { font-size	: 105%;}
+h5 { font-size	: 110%;}
+h4 { font-size	: 115%;}
+h3 { font-size	: 120%;}
+h2 { font-size	: 130%;}
+h1 { font-size	: 140%;}
+
+.error
+{
+	color				: #FE1010;
+	background-color	: #DEDEDE;
+	font-size			: 105%;
+	padding				: 10px;
+}
+
+table td
+{
+	vertical-align	: top;
 }
 
 body
@@ -120,3 +144,9 @@ div.tech p:after
 	bottom:0;
 	left:0;
 }
+
+div.person-profile h5
+{
+	margin-top:10px;
+}
+

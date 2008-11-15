@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using Castle.ActiveRecord;
 using OpenUni.Domain.Extensions;
 
@@ -45,5 +44,12 @@ namespace OpenUni.Domain.People
 		{
 			get { return address; }
 		}
+
+		[Property]
+		public virtual string Username { get; set; }
+
+		[Property]
+		public virtual string Password { get; set; }
+
 	}
 }

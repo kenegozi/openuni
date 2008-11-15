@@ -107,9 +107,11 @@
     <Content Include="Static\styles\default.css" />
     <Content Include="Views\Departments\Index.aspx" />
     <Content Include="Views\Departments\Show.aspx" />
+    <Content Include="Views\Errors\Error404.aspx" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Layouts\Default.aspx" />
+    <Content Include="Views\Login\Login.aspx" />
     <Content Include="Views\Modules\Index.aspx" />
     <Content Include="Views\Modules\Show.aspx" />
     <Content Include="Views\People\Profiles\Professor.aspx" />
@@ -123,6 +125,7 @@
     <Compile Include="Controllers\AbstractController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\People\Areas.cs" />
     <Compile Include="Controllers\People\ProfilesController.cs" />
@@ -151,6 +154,7 @@
     <Compile Include="Views\Layouts\Layouts.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\Login\ILoginView.cs" />
     <Compile Include="Views\Modules\IIndexView.cs">
       <SubType>Code</SubType>
     </Compile>

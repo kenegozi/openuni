@@ -85,6 +85,11 @@ namespace OpenUni.Web.UI.Controllers
 			}
 		}
 
+		protected void Error404()
+		{
+			RenderView("/Errors/Error404");
+			Response.StatusCode = 404;
+		}
 	}
 
 	public abstract class AbstractController<TView> : AbstractController

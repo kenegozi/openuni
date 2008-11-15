@@ -1,10 +1,13 @@
+using System.Net;
+using System.Text;
+
 using Castle.MonoRail.Framework;
 using Castle.Tools.CodeGenerator.External;
 using OpenUni.Domain.Modules;
 using OpenUni.Web.UI.Views.Layouts;
 using OpenUni.Web.UI.Views.Modules;
 
-namespace OpenUni.Web.UI.Controllers.People
+namespace OpenUni.Web.UI.Controllers
 {
 	[Layout(Layouts.DEFAULT)]
 	public partial class ModulesController : AbstractController
@@ -24,10 +27,26 @@ namespace OpenUni.Web.UI.Controllers.People
 		}
 
 		[PatternRoute("ModuleById", "modules/<moduleId:int>/<moduleName>")]
-		public void Show(int moduleId)
+		public void Show(int moduleId, string moduleName)
 		{
+			var module = modulesRepository.Get(moduleId);
+			if (module == null)
+			{
+				Error404();
+				return;
+			}
+
+			var expectedModuleName = module.Name.Replace(":", "");
+			if (expectedModuleName != moduleName)
+			{
+				RedirectToUrl(Routes.ModuleById(moduleId, expectedModuleName));
+				Response.StatusCode = 301;//permanent redirect
+				return;
+			}
+
 			var view = Typed<IModuleView>();
-			view.Module = modulesRepository.Get(moduleId);
+			view.Module = module;
+
 		}
 	}
 }

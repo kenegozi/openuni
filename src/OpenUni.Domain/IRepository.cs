@@ -11,7 +11,7 @@ namespace OpenUni.Domain
 		/// Get by primary key.
 		/// </summary>
 		/// <param name="id">The entity id</param>
-		/// <returns>Entity of T, with the give id</returns>
+		/// <returns>Entity of T, with the given id</returns>
 		T GetBy(K id);
 	}
 }
