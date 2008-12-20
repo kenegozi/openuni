@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 
+using OpenUni.Domain.People;
+
 namespace OpenUni.Domain.Modules
 {
 	/// <summary>
@@ -20,5 +22,7 @@ namespace OpenUni.Domain.Modules
 		/// <param name="id">The id of the module</param>
 		/// <returns>Module with Id = id</returns>
 		Module Get(int id);
+
+		IEnumerable<Module> AllFor(Person person);
 	}
 }

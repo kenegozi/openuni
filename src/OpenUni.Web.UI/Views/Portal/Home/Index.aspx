@@ -3,5 +3,5 @@
 <%@ Import Namespace="OpenUni.Web.UI.Views.People.Profiles"%>
 
 <div class="person-profile">
-	<h3><%=view.Person.FullName%></h3>
+	<h3>שלום <%=view.Person.FullName%> וברוך הבא</h3>
 </div>

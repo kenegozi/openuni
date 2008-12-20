@@ -2,6 +2,7 @@ using Castle.MonoRail.Framework;
 using Castle.Tools.CodeGenerator.External;
 
 using OpenUni.Domain.People;
+using OpenUni.Web.UI.SiteMap;
 using OpenUni.Web.UI.Views.Layouts;
 using OpenUni.Web.UI.Views.Login;
 
@@ -46,7 +47,22 @@ namespace OpenUni.Web.UI.Controllers
 				return;
 			}
 
-			RenderText("will redirect to " + returnUrl);
+			Session["Person"] = person;
+
+			if (string.IsNullOrEmpty(returnUrl))
+				RedirectUserToDefaultPage(person);
+			else
+				RedirectToUrl(returnUrl);
+		}
+
+		void RedirectUserToDefaultPage(Person person)
+		{
+			if (person is StaffMember)
+			{
+				//RedirectToStaffMemberPanel
+				return;				
+			}
+			RedirectUsingNamedRoute(RouteDefinitions.PortalHome.RouteName);
 		}
 
 		void TryAgain(string returnUrl, int icn, string username)

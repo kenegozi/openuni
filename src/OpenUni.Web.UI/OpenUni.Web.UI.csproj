@@ -110,6 +110,7 @@
     <Content Include="Views\Errors\Error404.aspx" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Layouts\Portal.aspx" />
     <Content Include="Views\Layouts\Default.aspx" />
     <Content Include="Views\Login\Login.aspx" />
     <Content Include="Views\Modules\Index.aspx" />
@@ -117,6 +118,8 @@
     <Content Include="Views\People\Profiles\Professor.aspx" />
     <Content Include="Views\People\Profiles\StaffMember.aspx" />
     <Content Include="Views\People\Profiles\Person.aspx" />
+    <Content Include="Views\Portal\Home\Index.aspx" />
+    <Content Include="Views\Portal\Modules\MyModules.aspx" />
     <Content Include="Views\SqlLog\View.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -129,10 +132,13 @@
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\People\Areas.cs" />
     <Compile Include="Controllers\People\ProfilesController.cs" />
+    <Compile Include="Controllers\Portal\ModulesController.cs" />
+    <Compile Include="Controllers\Portal\HomeController.cs" />
     <Compile Include="Controllers\SqlLogController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Filters\AuthenticationFilter.cs" />
     <Compile Include="Filters\DefaultLayoutCommonFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

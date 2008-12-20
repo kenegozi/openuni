@@ -157,6 +157,36 @@ namespace OpenUni.Web.UI.SiteMap {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPortalHomeControllerActionNode {
+        
+        protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
+        
+        public RootPortalHomeControllerActionNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
+            this._services = services;
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerActionReference Index() {
+            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.HomeController), "Portal", "Home", "Index", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.Portal.HomeController), "Index", new System.Type[0]), new Castle.Tools.CodeGenerator.External.ActionArgument[0]);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPortalModulesControllerActionNode {
+        
+        protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
+        
+        public RootPortalModulesControllerActionNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
+            this._services = services;
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerActionReference MyModules() {
+            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Portal", "Modules", "MyModules", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "MyModules", new System.Type[0]), new Castle.Tools.CodeGenerator.External.ActionArgument[0]);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
     public partial class RootPeopleProfilesControllerActionNode {
         
         protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
@@ -269,6 +299,24 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         /// <summary>
+        /// /portal
+        /// </summary>
+        public static PortalHomeRoute PortalHome {
+            get {
+                return new PortalHomeRoute();
+            }
+        }
+        
+        /// <summary>
+        /// /portal/modules
+        /// </summary>
+        public static PortalMyModulesRoute PortalMyModules {
+            get {
+                return new PortalMyModulesRoute();
+            }
+        }
+        
+        /// <summary>
         /// people/&lt;username&gt;/&lt;personId:guid&gt;
         /// </summary>
         public static ProfileByPersonDetailsRoute ProfileByPersonDetails {
@@ -372,6 +420,22 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+        public partial class PortalHomeRoute : Castle.Tools.CodeGenerator.External.StaticRoute {
+            
+            public PortalHomeRoute() : 
+                    base("PortalHome", "/portal", "Portal", "Home", "Index") {
+            }
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+        public partial class PortalMyModulesRoute : Castle.Tools.CodeGenerator.External.StaticRoute {
+            
+            public PortalMyModulesRoute() : 
+                    base("PortalMyModules", "/portal/modules", "Portal", "Modules", "MyModules") {
+            }
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
         public partial class ProfileByPersonDetailsRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
             
             public ProfileByPersonDetailsRoute() : 
@@ -464,6 +528,20 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         /// <summary>
+        /// /portal
+        /// </summary>
+        public virtual string PortalHome() {
+            return RouteDefinitions.PortalHome.CreateUrl(null);
+        }
+        
+        /// <summary>
+        /// /portal/modules
+        /// </summary>
+        public virtual string PortalMyModules() {
+            return RouteDefinitions.PortalMyModules.CreateUrl(null);
+        }
+        
+        /// <summary>
         /// people/&lt;username&gt;/&lt;personId:guid&gt;
         /// </summary>
         public virtual string ProfileByPersonDetails(string username, System.Guid personId) {
@@ -510,6 +588,26 @@ namespace OpenUni.Web.UI.SiteMap {
         protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
         
         public RootSqlLogControllerRouteNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
+            this._services = services;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPortalHomeControllerRouteNode {
+        
+        protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
+        
+        public RootPortalHomeControllerRouteNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
+            this._services = services;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPortalModulesControllerRouteNode {
+        
+        protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
+        
+        public RootPortalModulesControllerRouteNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
             this._services = services;
         }
     }
@@ -631,6 +729,33 @@ namespace OpenUni.Web.UI.SiteMap {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPortalHomeControllerViewNode {
+        
+        protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
+        
+        public RootPortalHomeControllerViewNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
+            this._services = services;
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerViewReference Index {
+            get {
+                return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.HomeController), "Portal", "Home", "Index");
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPortalModulesControllerViewNode {
+        
+        protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
+        
+        public RootPortalModulesControllerViewNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
+            this._services = services;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
     public partial class RootPeopleProfilesControllerViewNode {
         
         protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
@@ -676,6 +801,8 @@ namespace OpenUni.Web.UI.SiteMap {
         
         private RootSqlLogControllerNode _sqlLog;
         
+        private RootPortalAreaNode _portal;
+        
         private RootPeopleAreaNode _people;
         
         public RootAreaNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
@@ -685,6 +812,7 @@ namespace OpenUni.Web.UI.SiteMap {
             this._login = new RootLoginControllerNode(this._services);
             this._modules = new RootModulesControllerNode(this._services);
             this._sqlLog = new RootSqlLogControllerNode(this._services);
+            this._portal = new RootPortalAreaNode(this._services);
             this._people = new RootPeopleAreaNode(this._services);
         }
         
@@ -720,6 +848,13 @@ namespace OpenUni.Web.UI.SiteMap {
         public virtual RootSqlLogControllerNode SqlLog {
             get {
                 return this._sqlLog;
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual RootPortalAreaNode Portal {
+            get {
+                return this._portal;
             }
         }
         
@@ -835,6 +970,80 @@ namespace OpenUni.Web.UI.SiteMap {
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public virtual RootSqlLogControllerActionNode Actions {
+            get {
+                return this;
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPortalAreaNode {
+        
+        protected Castle.Tools.CodeGenerator.External.ICodeGeneratorServices _services;
+        
+        private RootPortalHomeControllerNode _home;
+        
+        private RootPortalModulesControllerNode _modules;
+        
+        public RootPortalAreaNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
+            this._services = services;
+            this._home = new RootPortalHomeControllerNode(this._services);
+            this._modules = new RootPortalModulesControllerNode(this._services);
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual RootPortalHomeControllerNode Home {
+            get {
+                return this._home;
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual RootPortalModulesControllerNode Modules {
+            get {
+                return this._modules;
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPortalHomeControllerNode : RootPortalHomeControllerActionNode {
+        
+        public RootPortalHomeControllerNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) : 
+                base(services) {
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual RootPortalHomeControllerViewNode Views {
+            get {
+                return new RootPortalHomeControllerViewNode(this._services);
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual RootPortalHomeControllerActionNode Actions {
+            get {
+                return this;
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class RootPortalModulesControllerNode : RootPortalModulesControllerActionNode {
+        
+        public RootPortalModulesControllerNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) : 
+                base(services) {
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual RootPortalModulesControllerViewNode Views {
+            get {
+                return new RootPortalModulesControllerViewNode(this._services);
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual RootPortalModulesControllerActionNode Actions {
             get {
                 return this;
             }
@@ -1036,6 +1245,74 @@ namespace OpenUni.Web.UI.Controllers {
         public virtual OpenUni.Web.UI.SiteMap.RootSqlLogControllerRouteNode MyRoutes {
             get {
                 return new OpenUni.Web.UI.SiteMap.RootSqlLogControllerRouteNode(this.CodeGeneratorServices);
+            }
+        }
+        
+        protected override void PerformGeneratedInitialize() {
+            base.PerformGeneratedInitialize();
+            this.PropertyBag["MyViews"] = this.MyViews;
+            this.PropertyBag["MyActions"] = this.MyActions;
+            this.PropertyBag["MyRoutes"] = this.MyRoutes;
+        }
+    }
+}
+namespace OpenUni.Web.UI.Controllers.Portal {
+    using System;
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class HomeController {
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual OpenUni.Web.UI.SiteMap.RootPortalHomeControllerNode MyActions {
+            get {
+                return new OpenUni.Web.UI.SiteMap.RootPortalHomeControllerNode(this.CodeGeneratorServices);
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual OpenUni.Web.UI.SiteMap.RootPortalHomeControllerViewNode MyViews {
+            get {
+                return new OpenUni.Web.UI.SiteMap.RootPortalHomeControllerViewNode(this.CodeGeneratorServices);
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual OpenUni.Web.UI.SiteMap.RootPortalHomeControllerRouteNode MyRoutes {
+            get {
+                return new OpenUni.Web.UI.SiteMap.RootPortalHomeControllerRouteNode(this.CodeGeneratorServices);
+            }
+        }
+        
+        protected override void PerformGeneratedInitialize() {
+            base.PerformGeneratedInitialize();
+            this.PropertyBag["MyViews"] = this.MyViews;
+            this.PropertyBag["MyActions"] = this.MyActions;
+            this.PropertyBag["MyRoutes"] = this.MyRoutes;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+    public partial class ModulesController {
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual OpenUni.Web.UI.SiteMap.RootPortalModulesControllerNode MyActions {
+            get {
+                return new OpenUni.Web.UI.SiteMap.RootPortalModulesControllerNode(this.CodeGeneratorServices);
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual OpenUni.Web.UI.SiteMap.RootPortalModulesControllerViewNode MyViews {
+            get {
+                return new OpenUni.Web.UI.SiteMap.RootPortalModulesControllerViewNode(this.CodeGeneratorServices);
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual OpenUni.Web.UI.SiteMap.RootPortalModulesControllerRouteNode MyRoutes {
+            get {
+                return new OpenUni.Web.UI.SiteMap.RootPortalModulesControllerRouteNode(this.CodeGeneratorServices);
             }
         }
         

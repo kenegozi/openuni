@@ -56,7 +56,9 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="Modules\IModulesRepository.cs" />
     <Compile Include="Modules\Module.cs" />
+    <Compile Include="Modules\ModuleAvailability.cs" />
     <Compile Include="Modules\ModuleInfo.cs" />
+    <Compile Include="Modules\ModuleRegistration.cs" />
     <Compile Include="Modules\ModuleSpecification.cs" />
     <Compile Include="Modules\ModuleTypes.cs" />
     <Compile Include="Modules\Requirement.cs" />
