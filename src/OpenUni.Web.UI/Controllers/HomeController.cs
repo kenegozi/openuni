@@ -14,7 +14,7 @@ namespace OpenUni.Web.UI.Controllers
 		}
 
 		[StaticRoute("about", "about")]
-        [Cache(HttpCacheability.Public, MaxAge= TimeSpan.FromHours(1))]
+		[Cache(HttpCacheability.Public, Duration = 60 * 60 * 2)]
 		public void About()
 		{
 
