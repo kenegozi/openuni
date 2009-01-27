@@ -13,7 +13,7 @@
 	</p>
 	<p>
 		<span class="caption">מרכז: </span>
-		<a href="~/people/<%=view.Module.Director.Id%>"><%=view.Module.Director.FullName%></a>
+		<a href="<%=ProfileUrl(view.Module.Director)%>"><%=view.Module.Director.FullName%></a>
 	</p>
 	<p class="description">	<%=view.Module.Description %></p>
 	
