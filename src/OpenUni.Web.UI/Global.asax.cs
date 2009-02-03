@@ -11,7 +11,10 @@ using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
 using Castle.MonoRail.Framework;
 using Castle.MonoRail.Framework.Configuration;
+using Castle.MonoRail.Framework.Helpers.ValidationStrategy;
 using Castle.MonoRail.Framework.Internal;
+using Castle.MonoRail.Framework.JSGeneration;
+using Castle.MonoRail.Framework.JSGeneration.jQuery;
 using Castle.MonoRail.Framework.Routing;
 using Castle.MonoRail.Views.AspView;
 using Castle.MonoRail.WindsorExtension;
@@ -57,7 +60,7 @@ namespace OpenUni.Web.UI
 		private static void RegisterComponents()
 		{
 			container.Register(
-				AllTypes.Of<SmartDispatcherController>().
+				AllTypes.Of<Controller>().
 					FromAssembly(typeof(HomeController).Assembly),
 				AllTypes.Of<IFilter>().
 					FromAssembly(typeof(HomeController).Assembly),
@@ -86,12 +89,15 @@ namespace OpenUni.Web.UI
 
 		private static void InitialiseRoutes()
 		{
+			//RoutingModuleEx.Engine.Add(new PatternRoute("<controller>/<action>"));
+
 			var routes = typeof(RouteDefinitions).GetProperties(BindingFlags.Static | BindingFlags.Public)
 				.Where(p => p.PropertyType.Name.EndsWith("Route"))
 				.Select(r => r.GetGetMethod().Invoke(null, null));
 
 			foreach (var r in routes)
                 RoutingModuleEx.Engine.Add((IRoutingRule)r);
+
 		}
 
 		protected void Session_Start(object sender, EventArgs e)
@@ -154,6 +160,15 @@ namespace OpenUni.Web.UI
 			configuration.ControllersConfig.AddAssembly(Assembly.GetExecutingAssembly());
 			configuration.ViewEngineConfig.ViewPathRoot = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Views");
 			configuration.ViewEngineConfig.ViewEngines.Add(new ViewEngineInfo(typeof(AspViewEngine), false));
+
+			configuration.JSGeneratorConfiguration.AddLibrary("jquery-1.2.1", typeof(JQueryGenerator))
+	.AddExtension(typeof(CommonJSExtension))
+	.ElementGenerator
+		.AddExtension(typeof(JQueryElementGenerator))
+		.Done
+	.BrowserValidatorIs(typeof(JQueryValidator))
+	.SetAsDefault();
+	
 		}
 
 

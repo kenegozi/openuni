@@ -42,6 +42,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Castle.Components.DictionaryAdapter.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Components.Validator, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Castle.Components.Validator.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Castle.Core.dll</HintPath>
@@ -108,6 +112,8 @@
     <Content Include="Views\Departments\Index.aspx" />
     <Content Include="Views\Departments\Show.aspx" />
     <Content Include="Views\Errors\Error404.aspx" />
+    <Content Include="Views\Hello\To.aspx" />
+    <Content Include="Views\Hello\World.aspx" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Layouts\Portal.aspx" />
@@ -118,6 +124,8 @@
     <Content Include="Views\People\Profiles\Professor.aspx" />
     <Content Include="Views\People\Profiles\StaffMember.aspx" />
     <Content Include="Views\People\Profiles\Person.aspx" />
+    <Content Include="Views\Pets\Cat.aspx" />
+    <Content Include="Views\Pets\EditCat.aspx" />
     <Content Include="Views\Portal\Home\Index.aspx" />
     <Content Include="Views\Portal\Modules\MyModules.aspx" />
     <Content Include="Views\SqlLog\View.aspx" />
@@ -132,8 +140,10 @@
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\People\Areas.cs" />
     <Compile Include="Controllers\People\ProfilesController.cs" />
+    <Compile Include="Controllers\HelloController.cs" />
     <Compile Include="Controllers\Portal\ModulesController.cs" />
     <Compile Include="Controllers\Portal\HomeController.cs" />
+    <Compile Include="Controllers\PetsController.cs" />
     <Compile Include="Controllers\SqlLogController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -144,6 +154,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SiteMaps\Routes.cs" />
     <Compile Include="SiteMaps\SiteMap.MonoRail.generated.cs" />
     <Compile Include="Views\Departments\IDepartmentShowView.cs">
       <SubType>Code</SubType>
@@ -154,6 +165,7 @@
     <Compile Include="Views\ISiteAwareView.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\IView.cs" />
     <Compile Include="Views\Layouts\IDefaultLayout.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -168,6 +180,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\People\Profiles\IShowProfileView.cs" />
+    <Compile Include="Views\Pets\ICatView.cs" />
     <Compile Include="Views\View.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -215,6 +228,8 @@
   <PropertyGroup>
     <PostBuildEvent>copy "$(SolutionDir)..\..\lib\Castle.Services.Logging.Log4netIntegration.dll" "$(TargetDir)"
 copy "$(SolutionDir)..\..\lib\log4net.dll" "$(TargetDir)"
-copy "$(SolutionDir)..\..\lib\D9.*.dll" "$(TargetDir)"</PostBuildEvent>
+copy "$(SolutionDir)..\..\lib\D9.*.dll" "$(TargetDir)"
+copy "$(SolutionDir)..\..\lib\NHibernate.ByteCode.Castle.dll" "$(TargetDir)"</PostBuildEvent>
+    <PreBuildEvent>"$(ProjectDir)SiteMaps\GenerateMonorailSiteMap.bat"</PreBuildEvent>
   </PropertyGroup>
 </Project>

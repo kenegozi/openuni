@@ -35,5 +35,16 @@ namespace OpenUni.Web.UI.Views
 		{
 			return Routes.ModuleById(module.Id, module.Name.Replace(":", ""));
 		}
+
+		/// <summary>
+		/// Adds an entry to the current property bag,
+		/// marking the given type for validation helper usage
+		/// </summary>
+		/// <typeparam name="TValidatedType">The type of the validated entity</typeparam>
+		protected void RegisterValidation<TValidatedType>()
+		{
+			var type = typeof (TValidatedType);
+			Context.CurrentControllerContext.PropertyBag.Add(type.Name + "type", type);
+		}
 	}
 }
