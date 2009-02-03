@@ -753,6 +753,13 @@ namespace OpenUni.Web.UI.SiteMap {
         public RootPortalModulesControllerViewNode(Castle.Tools.CodeGenerator.External.ICodeGeneratorServices services) {
             this._services = services;
         }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerViewReference MyModules {
+            get {
+                return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Portal", "Modules", "MyModules");
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
