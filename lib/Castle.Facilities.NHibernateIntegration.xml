@@ -2082,11 +2082,6 @@
             <param name="alias"></param>
             <returns></returns>
         </member>
-        <member name="F:Castle.Facilities.NHibernateIntegration.Internal.AbstractDictStackSessionStore.SlotKey">
-            <summary>
-            Name used for storage in <see cref="T:System.Runtime.Remoting.Messaging.CallContext"/>
-            </summary>
-        </member>
         <member name="M:Castle.Facilities.NHibernateIntegration.Internal.AbstractDictStackSessionStore.GetStackFor(System.String)">
             <summary>
             Gets the stack of <see cref="T:Castle.Facilities.NHibernateIntegration.SessionDelegate"/> objects for the specified <paramref name="alias"/>.
@@ -2105,6 +2100,11 @@
             Stores the dictionary.
             </summary>
             <param name="dictionary">The dictionary.</param>
+        </member>
+        <member name="P:Castle.Facilities.NHibernateIntegration.Internal.AbstractDictStackSessionStore.SlotKey">
+            <summary>
+            Name used for storage in <see cref="T:System.Runtime.Remoting.Messaging.CallContext"/>
+            </summary>
         </member>
         <member name="T:Castle.Facilities.NHibernateIntegration.Internal.CallContextSessionStore">
             <summary>
@@ -2221,6 +2221,16 @@
             The flushmode the created session gets
             </summary>
         </member>
+        <member name="F:Castle.Facilities.NHibernateIntegration.Internal.DefaultSessionManager.InterceptorFormatString">
+            <summary>
+            Format string for NHibernate interceptor components
+            </summary>
+        </member>
+        <member name="F:Castle.Facilities.NHibernateIntegration.Internal.DefaultSessionManager.InterceptorName">
+            <summary>
+            Name for NHibernate Interceptor componentInterceptorName
+            </summary>
+        </member>
         <member name="M:Castle.Facilities.NHibernateIntegration.Internal.DefaultSessionManager.#ctor(Castle.Facilities.NHibernateIntegration.ISessionStore,Castle.MicroKernel.IKernel,Castle.Facilities.NHibernateIntegration.Internal.ISessionFactoryResolver)">
             <summary>
             Initializes a new instance of the <see cref="T:Castle.Facilities.NHibernateIntegration.Internal.DefaultSessionManager"/> class.
@@ -2257,6 +2267,47 @@
             The flushmode the created session gets
             </summary>
             <value></value>
+        </member>
+        <member name="T:Castle.Facilities.NHibernateIntegration.Internal.FileAssemblyResource">
+            <summary>
+            Resource for a file or an assembly resource
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.FileAssemblyResource.#ctor(System.String)">
+            <summary>
+            Depending on the resource type, <see cref="T:Castle.Core.Resource.AssemblyResource"/> or <see cref="T:Castle.Core.Resource.FileResource"/> is decorated.
+            </summary>
+            <param name="resource"></param>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.FileAssemblyResource.CreateRelative(System.String)">
+            <summary>
+            Returns an instance of Castle.Core.Resource.IResource created according to the relativePath using itself as the root.
+            </summary>
+            <param name="relativePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.FileAssemblyResource.GetStreamReader(System.Text.Encoding)">
+            <summary>
+            Returns a reader for the stream
+            </summary>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.FileAssemblyResource.GetStreamReader">
+            <summary>
+            Returns a reader for the stream
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.FileAssemblyResource.Dispose">
+            <summary>
+            Disposes the allocated resources
+            </summary>
+        </member>
+        <member name="P:Castle.Facilities.NHibernateIntegration.Internal.FileAssemblyResource.FileBasePath">
+            <summary>
+            Only valid for resources that can be obtained through relative paths
+            </summary>
         </member>
         <member name="T:Castle.Facilities.NHibernateIntegration.Internal.ISessionFactoryResolver">
             <summary>
@@ -2438,6 +2489,16 @@
             <param name="lockMode">The lock level</param>
             <returns>the persistent instance</returns>
         </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.SessionDelegate.Load(System.String,System.Object,NHibernate.LockMode)">
+            <summary>
+            Return the persistent instance of the given entity class with the given identifier,
+            obtaining the specified lock mode.
+            </summary>
+            <param name="entityName">Name of the entity</param>
+            <param name="id">A valid identifier of an existing persistent instance of the class</param>
+            <param name="lockMode">The lock level</param>
+            <returns>the persistent instance</returns>
+        </member>
         <member name="M:Castle.Facilities.NHibernateIntegration.SessionDelegate.Load(System.Type,System.Object)">
             <summary>
             Return the persistent instance of the given entity class with the given identifier,
@@ -2466,6 +2527,14 @@
             Loads the specified id.
             </summary>
             <typeparam name="T"></typeparam>
+            <param name="id">The id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.SessionDelegate.Load(System.String,System.Object)">
+            <summary>
+            Loads the specified id.
+            </summary>
+            <param name="entityName">Name of the entity</param>
             <param name="id">The id.</param>
             <returns></returns>
         </member>
@@ -2778,6 +2847,17 @@
             transient instance with an identifier associated with existing persistent state.
             </remarks>
         </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.SessionDelegate.Delete(System.String,System.Object)">
+            <summary>
+            Remove a persistent instance from the datastore.
+            </summary>
+            <param name="entityName">Name of the entity</param>
+            <param name="obj">The instance to be removed</param>
+            <remarks>
+            The argument may be an instance associated with the receiving <c>ISession</c> or a
+            transient instance with an identifier associated with existing persistent state.
+            </remarks>
+        </member>
         <member name="M:Castle.Facilities.NHibernateIntegration.SessionDelegate.Find(System.String)">
             <summary>
             Execute a query
@@ -3027,6 +3107,21 @@
             Creates a new <c>Criteria</c> for the entity class with a specific alias
             </summary>
             <param name="persistentClass">The class to Query</param>
+            <param name="alias">The alias of the entity</param>
+            <returns>An ICriteria object</returns>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.SessionDelegate.CreateCriteria(System.String)">
+            <summary>
+            Creates a new <c>Criteria</c> for the entity class with a specific alias
+            </summary>
+            <param name="entityName">Name of the entity</param>
+            <returns>An ICriteria object</returns>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.SessionDelegate.CreateCriteria(System.String,System.String)">
+            <summary>
+            Creates a new <c>Criteria</c> for the entity class with a specific alias
+            </summary>
+            <param name="entityName">Name of the entity</param>
             <param name="alias">The alias of the entity</param>
             <returns>An ICriteria object</returns>
         </member>
@@ -3315,6 +3410,18 @@
             Stores the dictionary.
             </summary>
             <param name="dictionary">The dictionary.</param>
+        </member>
+        <member name="T:Castle.Facilities.NHibernateIntegration.Internal.XmlConfigurationBuilder">
+            <summary>
+            The configuration builder for NHibernate's own cfg.xml
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.XmlConfigurationBuilder.GetConfiguration(Castle.Core.Configuration.IConfiguration)">
+            <summary>
+            Returns the Configuration object for the given xml
+            </summary>
+            <param name="config"></param>
+            <returns></returns>
         </member>
         <member name="T:Castle.Facilities.NHibernateIntegration.Constants">
             <summary>
