@@ -231,7 +231,7 @@ namespace OpenUni.Web.UI.SiteMap {
         /// </summary>
         public static DepartmentsRoute Departments {
             get {
-                return new DepartmentsRoute();
+                return ((DepartmentsRoute)(new DepartmentsRoute().DefaultForArea().Is("").DefaultForController().Is<OpenUni.Web.UI.Controllers.DepartmentsController>().DefaultForAction().Is("Index")));
             }
         }
         
@@ -245,20 +245,11 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         /// <summary>
-        /// 
-        /// </summary>
-        public static HomepageRoute Homepage {
-            get {
-                return new HomepageRoute();
-            }
-        }
-        
-        /// <summary>
-        /// about
+        /// /about
         /// </summary>
         public static aboutRoute about {
             get {
-                return new aboutRoute();
+                return ((aboutRoute)(new aboutRoute().DefaultForArea().Is("").DefaultForController().Is<OpenUni.Web.UI.Controllers.HomeController>().DefaultForAction().Is("About")));
             }
         }
         
@@ -267,7 +258,7 @@ namespace OpenUni.Web.UI.SiteMap {
         /// </summary>
         public static LoginRoute Login {
             get {
-                return new LoginRoute();
+                return ((LoginRoute)(new LoginRoute().DefaultForArea().Is("").DefaultForController().Is<OpenUni.Web.UI.Controllers.LoginController>().DefaultForAction().Is("Login")));
             }
         }
         
@@ -276,7 +267,7 @@ namespace OpenUni.Web.UI.SiteMap {
         /// </summary>
         public static ModulesRoute Modules {
             get {
-                return new ModulesRoute();
+                return ((ModulesRoute)(new ModulesRoute().DefaultForArea().Is("").DefaultForController().Is<OpenUni.Web.UI.Controllers.ModulesController>().DefaultForAction().Is("Index")));
             }
         }
         
@@ -303,7 +294,7 @@ namespace OpenUni.Web.UI.SiteMap {
         /// </summary>
         public static PortalHomeRoute PortalHome {
             get {
-                return new PortalHomeRoute();
+                return ((PortalHomeRoute)(new PortalHomeRoute().DefaultForArea().Is("Portal").DefaultForController().Is<OpenUni.Web.UI.Controllers.Portal.HomeController>().DefaultForAction().Is("Index")));
             }
         }
         
@@ -312,7 +303,7 @@ namespace OpenUni.Web.UI.SiteMap {
         /// </summary>
         public static PortalMyModulesRoute PortalMyModules {
             get {
-                return new PortalMyModulesRoute();
+                return ((PortalMyModulesRoute)(new PortalMyModulesRoute().DefaultForArea().Is("Portal").DefaultForController().Is<OpenUni.Web.UI.Controllers.Portal.ModulesController>().DefaultForAction().Is("MyModules")));
             }
         }
         
@@ -326,10 +317,18 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-        public partial class DepartmentsRoute : Castle.Tools.CodeGenerator.External.StaticRoute {
+        public partial class DepartmentsRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
             
             public DepartmentsRoute() : 
-                    base("Departments", "departments", "", "Departments", "Index") {
+                    base("Departments", "departments") {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class RequiredParameters {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class OptionalParameters {
             }
         }
         
@@ -352,34 +351,50 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-        public partial class HomepageRoute : Castle.Tools.CodeGenerator.External.StaticRoute {
-            
-            public HomepageRoute() : 
-                    base("Homepage", "", "", "Home", "Index") {
-            }
-        }
-        
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-        public partial class aboutRoute : Castle.Tools.CodeGenerator.External.StaticRoute {
+        public partial class aboutRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
             
             public aboutRoute() : 
-                    base("about", "about", "", "Home", "About") {
+                    base("about", "/about") {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class RequiredParameters {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class OptionalParameters {
             }
         }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-        public partial class LoginRoute : Castle.Tools.CodeGenerator.External.StaticRoute {
+        public partial class LoginRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
             
             public LoginRoute() : 
-                    base("Login", "login", "", "Login", "Login") {
+                    base("Login", "login") {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class RequiredParameters {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class OptionalParameters {
             }
         }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-        public partial class ModulesRoute : Castle.Tools.CodeGenerator.External.StaticRoute {
+        public partial class ModulesRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
             
             public ModulesRoute() : 
-                    base("Modules", "modules", "", "Modules", "Index") {
+                    base("Modules", "modules") {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class RequiredParameters {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class OptionalParameters {
             }
         }
         
@@ -420,18 +435,34 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-        public partial class PortalHomeRoute : Castle.Tools.CodeGenerator.External.StaticRoute {
+        public partial class PortalHomeRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
             
             public PortalHomeRoute() : 
-                    base("PortalHome", "/portal", "Portal", "Home", "Index") {
+                    base("PortalHome", "/portal") {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class RequiredParameters {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class OptionalParameters {
             }
         }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-        public partial class PortalMyModulesRoute : Castle.Tools.CodeGenerator.External.StaticRoute {
+        public partial class PortalMyModulesRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
             
             public PortalMyModulesRoute() : 
-                    base("PortalMyModules", "/portal/modules", "Portal", "Modules", "MyModules") {
+                    base("PortalMyModules", "/portal/modules") {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class RequiredParameters {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class OptionalParameters {
             }
         }
         
@@ -469,7 +500,8 @@ namespace OpenUni.Web.UI.SiteMap {
         /// departments
         /// </summary>
         public virtual string Departments() {
-            return RouteDefinitions.Departments.CreateUrl(null);
+            System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
+            return RouteDefinitions.Departments.CreateUrl(routeParameters);
         }
         
         /// <summary>
@@ -482,31 +514,27 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         /// <summary>
-        /// 
-        /// </summary>
-        public virtual string Homepage() {
-            return RouteDefinitions.Homepage.CreateUrl(null);
-        }
-        
-        /// <summary>
-        /// about
+        /// /about
         /// </summary>
         public virtual string about() {
-            return RouteDefinitions.about.CreateUrl(null);
+            System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
+            return RouteDefinitions.about.CreateUrl(routeParameters);
         }
         
         /// <summary>
         /// login
         /// </summary>
         public virtual string Login() {
-            return RouteDefinitions.Login.CreateUrl(null);
+            System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
+            return RouteDefinitions.Login.CreateUrl(routeParameters);
         }
         
         /// <summary>
         /// modules
         /// </summary>
         public virtual string Modules() {
-            return RouteDefinitions.Modules.CreateUrl(null);
+            System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
+            return RouteDefinitions.Modules.CreateUrl(routeParameters);
         }
         
         /// <summary>
@@ -531,14 +559,16 @@ namespace OpenUni.Web.UI.SiteMap {
         /// /portal
         /// </summary>
         public virtual string PortalHome() {
-            return RouteDefinitions.PortalHome.CreateUrl(null);
+            System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
+            return RouteDefinitions.PortalHome.CreateUrl(routeParameters);
         }
         
         /// <summary>
         /// /portal/modules
         /// </summary>
         public virtual string PortalMyModules() {
-            return RouteDefinitions.PortalMyModules.CreateUrl(null);
+            System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
+            return RouteDefinitions.PortalMyModules.CreateUrl(routeParameters);
         }
         
         /// <summary>

@@ -13,14 +13,14 @@ namespace OpenUni.Web.UI.Controllers.Portal
 	[StudentsOnly]
 	public partial class ModulesController : AbstractController
 	{
-		IModulesRepository modulesRepository;
+		readonly IModulesRepository modulesRepository;
 
 		public ModulesController(IModulesRepository modulesRepository)
 		{
 			this.modulesRepository = modulesRepository;
 		}
 
-		[StaticRoute("PortalMyModules", "/portal/modules")]
+		[PatternRoute("PortalMyModules", "/portal/modules")]
 		public void MyModules()
 		{
 			var person = Session["Person"] as Person;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
@@ -26,6 +27,7 @@ using OpenUni.Domain.Impl.Repositories;
 using OpenUni.Domain.Modules;
 using OpenUni.Domain.People;
 using OpenUni.Web.UI.Controllers;
+using OpenUni.Web.UI.Services.Authentication;
 using OpenUni.Web.UI.SiteMap;
 using System.Linq;
 
@@ -65,8 +67,8 @@ namespace OpenUni.Web.UI
 				AllTypes.Of<IFilter>().
 					FromAssembly(typeof(HomeController).Assembly),
 				AllTypes.Of<ViewComponent>().FromAssembly(typeof(Global).Assembly)
-					.Configure(reg=>reg.Named(reg.ServiceType.Name))
-            );
+					.Configure(reg => reg.Named(reg.ServiceType.Name))
+			);
 
 			container.Register(
 				Component.For<IArgumentConversionService>().ImplementedBy<DefaultArgumentConversionService>().LifeStyle.Transient,
@@ -81,6 +83,9 @@ namespace OpenUni.Web.UI
 				Component.For<IRoutingEngine>().Instance(RoutingModuleEx.Engine));
 
 			container.Register(
+				Component.For<IFormsAuthentication>().ImplementedBy<DefaultFormsAuthentication>().LifeStyle.Singleton);
+
+			container.Register(
 				Component.For<IDepartmentsRepository>().ImplementedBy<DepartmentsRepository>().LifeStyle.Singleton,
 				Component.For<IModulesRepository>().ImplementedBy<ModulesRepository>().LifeStyle.Singleton,
 				Component.For<IPeopleRepository>().ImplementedBy<PeopleRepository>().LifeStyle.Singleton
@@ -90,13 +95,23 @@ namespace OpenUni.Web.UI
 		private static void InitialiseRoutes()
 		{
 			//RoutingModuleEx.Engine.Add(new PatternRoute("<controller>/<action>"));
-
+			/*
+			RoutingModuleEx.Engine.Add(
+						new PatternRoute("Home", "/[controller]")
+								.DefaultForController().Is("Home")
+								.DefaultForArea().IsEmpty
+								.DefaultForAction().Is("Index")
+						);
+			*/
 			var routes = typeof(RouteDefinitions).GetProperties(BindingFlags.Static | BindingFlags.Public)
 				.Where(p => p.PropertyType.Name.EndsWith("Route"))
 				.Select(r => r.GetGetMethod().Invoke(null, null));
 
+			var homepageRoute = new HomepageRoute("Homepage");
+			RoutingModuleEx.Engine.Add(homepageRoute);
+
 			foreach (var r in routes)
-                RoutingModuleEx.Engine.Add((IRoutingRule)r);
+				RoutingModuleEx.Engine.Add((IRoutingRule)r);
 
 		}
 
@@ -168,7 +183,7 @@ namespace OpenUni.Web.UI
 		.Done
 	.BrowserValidatorIs(typeof(JQueryValidator))
 	.SetAsDefault();
-	
+
 		}
 
 
@@ -176,6 +191,24 @@ namespace OpenUni.Web.UI
 		public IWindsorContainer Container
 		{
 			get { return container; }
+		}
+	}
+
+	internal class HomepageRulzComparer : IComparer<string>
+	{
+		readonly StringComparer comparer = StringComparer.Ordinal;
+		public int Compare(string x, string y)
+		{
+			if (IsHomepage(x))
+				return 1;
+			if (IsHomepage(y))
+				return -1;
+			return comparer.Compare(x, y);
+		}
+
+		static bool IsHomepage(string str)
+		{
+			return "homepage".Equals(str, StringComparison.InvariantCultureIgnoreCase);
 		}
 	}
 }

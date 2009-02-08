@@ -15,7 +15,7 @@ namespace OpenUni.Web.UI.Controllers
 			this.departmentsRepository = departmentsRepository;
 		}
 
-		[StaticRoute("Departments", "departments")]
+		[PatternRoute("Departments", "departments")]
 		public void Index()
 		{
 		}

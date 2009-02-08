@@ -18,7 +18,7 @@ namespace OpenUni.Web.UI.Controllers
 			this.modulesRepository = modulesRepository;
 		}
 
-		[StaticRoute("Modules", "modules")]
+		[PatternRoute("Modules", "modules")]
 		public void Index([DataBind("filter")] ModuleSpecification specification)
 		{
 			var view = Typed<IIndexView>();

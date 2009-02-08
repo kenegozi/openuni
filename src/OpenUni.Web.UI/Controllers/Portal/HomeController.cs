@@ -9,7 +9,7 @@ namespace OpenUni.Web.UI.Controllers.Portal
 	[Layout(Layouts.PORTAL)]
 	public partial class HomeController : AbstractController
 	{
-		[StaticRoute("PortalHome", "/portal")]
+		[PatternRoute("PortalHome", "/portal")]
 		public void Index()
 		{
 			PropertyBag["Person"] = Session["Person"];

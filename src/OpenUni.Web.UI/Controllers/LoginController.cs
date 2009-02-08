@@ -2,24 +2,37 @@ using Castle.MonoRail.Framework;
 using Castle.Tools.CodeGenerator.External;
 
 using OpenUni.Domain.People;
+using OpenUni.Web.UI.Services.Authentication;
 using OpenUni.Web.UI.SiteMap;
 using OpenUni.Web.UI.Views.Layouts;
 using OpenUni.Web.UI.Views.Login;
 
 namespace OpenUni.Web.UI.Controllers
 {
+	/// <summary>
+	/// Login logic
+	/// </summary>
 	[Layout(Layouts.DEFAULT)]
 	public partial class LoginController : AbstractController<ILoginView>
 	{
-		IPeopleRepository peopleRepository;
+		#region DI
+		readonly IPeopleRepository peopleRepository;
+		readonly IFormsAuthentication formsAuthentication;
 
-		public LoginController(IPeopleRepository peopleRepository)
+		/// <summary>
+		/// new login controller
+		/// </summary>
+		/// <param name="peopleRepository">People repository</param>
+		/// <param name="formsAuthentication">Forms authentication service</param>
+		public LoginController(IPeopleRepository peopleRepository, IFormsAuthentication formsAuthentication)
 		{
 			this.peopleRepository = peopleRepository;
+			this.formsAuthentication = formsAuthentication;
 		}
+		#endregion
 
 		[AccessibleThrough(Verb.Get)]
-		[StaticRoute("Login", "login")]
+		[PatternRoute("Login", "login")]
 		public void Login(string returnUrl)
 		{
 
@@ -48,6 +61,9 @@ namespace OpenUni.Web.UI.Controllers
 			}
 
 			Session["Person"] = person;
+
+			formsAuthentication.SignOut();
+			formsAuthentication.SetAuthenticationCookie(person.Username);
 
 			if (string.IsNullOrEmpty(returnUrl))
 				RedirectUserToDefaultPage(person);
