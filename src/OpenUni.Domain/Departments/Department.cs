@@ -6,7 +6,7 @@ using OpenUni.Domain.People;
 
 namespace OpenUni.Domain.Departments
 {
-	[ActiveRecord]
+	[ActiveRecord(Cache = CacheEnum.ReadWrite)]
 	public class Department
 	{
 		private readonly IList<StaffMember> staff = new List<StaffMember>();

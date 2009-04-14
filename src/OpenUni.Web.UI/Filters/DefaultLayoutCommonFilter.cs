@@ -24,6 +24,9 @@ namespace OpenUni.Web.UI.Filters
 			if (IsNotGet(context))
 				return true;
 
+			if (controllerContext.LayoutNames == null || controllerContext.LayoutNames.Length == 0)
+				return true;
+
 			var layout = dictionaryAdapterFactory.GetAdapter<IDefaultLayout>(controllerContext.PropertyBag);
 			layout.Departments = departmentsRepository.FindAll();
 			return true;

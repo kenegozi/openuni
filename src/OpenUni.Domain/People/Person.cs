@@ -4,7 +4,7 @@ using OpenUni.Domain.Extensions;
 
 namespace OpenUni.Domain.People
 {
-	[ActiveRecord, JoinedBase]
+	[ActiveRecord(Cache = CacheEnum.ReadWrite), JoinedBase]
 	public class Person
 	{
 		protected AddressInfo address= new AddressInfo();

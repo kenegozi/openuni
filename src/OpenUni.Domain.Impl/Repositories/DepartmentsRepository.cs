@@ -7,14 +7,22 @@ namespace OpenUni.Domain.Impl.Repositories
 {
 	public class DepartmentsRepository : IDepartmentsRepository
 	{
+		private readonly ISessionFactory sessionFactory;
+
+		public DepartmentsRepository(ISessionFactory sessionFactory)
+		{
+			this.sessionFactory = sessionFactory;
+		}
+
 		ISession Session
 		{
-			get { return ActiveRecordMediator.GetSessionFactoryHolder().CreateSession(typeof (Department)); }
+			get { return sessionFactory.GetCurrentSession(); }
 		}
 
 		public IEnumerable<Department> FindAll()
 		{
 			return Session.CreateQuery("from Department d order by d.Name")
+				.SetCacheable(true)
 				.List<Department>();
 		}
 

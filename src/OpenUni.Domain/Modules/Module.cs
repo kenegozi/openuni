@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+using System.Web;
 using Castle.ActiveRecord;
 using OpenUni.Domain.Departments;
 using OpenUni.Domain.People;
@@ -34,6 +36,12 @@ namespace OpenUni.Domain.Modules
 		{
 			get { return name; }
 		}
+
+		public virtual string UrlFriendlyName
+		{
+			get { return nonUrlFriendly.Replace(Name, ""); }
+		}
+		static readonly Regex nonUrlFriendly = new Regex("[^-a-zà-ú0-9 _,]", RegexOptions.Compiled | RegexOptions.IgnoreCase); 
 
 		[Property]
 		public virtual string Description { get; set; }

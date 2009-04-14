@@ -36,5 +36,25 @@ namespace OpenUni.Domain.Impl.Repositories
 				.SetEntity("person", person)
 				.List<Module>();
 		}
+
+		public IEnumerable<Module> AllPrerequisitesFor(int id)
+		{
+			var q =
+				@"with Data AS (
+SELECT 0 AS Level, m.Id, m.Name, NULL AS Parent
+FROM Modules m 
+WHERE m.Id = :id
+UNION ALL
+SELECT Level + 1, m.Id, m.Name, p.PrerequisitedModuleId AS Parent
+FROM Modules m JOIN ModulePrerequisites p on p.ModuleId = m.Id
+JOIN Data d on d.Id = p.PrerequisitedModuleId
+)
+select {m.*} from Data
+";
+			return Session.CreateSQLQuery(q)
+				.SetInt32("id", id)
+				.List<Module>();
+
+		}
 	}
 }

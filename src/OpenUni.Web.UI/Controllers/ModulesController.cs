@@ -1,6 +1,6 @@
 using System.Net;
 using System.Text;
-
+using System.Web;
 using Castle.MonoRail.Framework;
 using Castle.Tools.CodeGenerator.External;
 using OpenUni.Domain.Modules;
@@ -26,7 +26,7 @@ namespace OpenUni.Web.UI.Controllers
 			view.Filter = specification;
 		}
 
-		[PatternRoute("ModuleById", "modules/<moduleId:int>/<moduleName>")]
+		[PatternRoute("ModuleById", "modules/<moduleId:int>/[moduleName]")]
 		public void Show(int moduleId, string moduleName)
 		{
 			var module = modulesRepository.Get(moduleId);
@@ -36,7 +36,7 @@ namespace OpenUni.Web.UI.Controllers
 				return;
 			}
 
-			var expectedModuleName = module.Name.Replace(":", "");
+			var expectedModuleName = module.UrlFriendlyName;
 			if (expectedModuleName != moduleName)
 			{
 				RedirectToUrl(Routes.ModuleById(moduleId, expectedModuleName));

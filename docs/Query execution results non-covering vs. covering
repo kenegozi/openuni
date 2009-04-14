@@ -1,0 +1,23 @@
+for the query:
+	SELECT FirstName, LastName 
+	FROM People p
+	where p.Username BETWEEN 35260922 AND 36000000
+
+using the following non-covering index:
+	CREATE INDEX IX_People_Username
+	ON People (Username) INCLUDE (FirstName, LastName)
+The query execution IO was:
+	Table 'People'. Scan count 2, logical reads 7558, physical reads 0, read-ahead reads 12, lob logical reads 0, lob physical reads 0, lob read-ahead reads 0.
+and the execution time was:
+	CPU time = 530 ms,  elapsed time = 656 ms.
+
+using the following covering index:
+	CREATE INDEX IX_People_Username
+	ON People (Username) 
+The query execution IO was:
+	Table 'People'. Scan count 1, logical reads 4604, physical reads 0, read-ahead reads 2, lob logical reads 0, lob physical reads 0, lob read-ahead reads 0.
+and the execution time was:
+	CPU time = 172 ms,  elapsed time = 513 ms.
+ 
+ 
+ 

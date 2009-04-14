@@ -131,18 +131,22 @@ div.tech p:after
 
 #sql-log
 {
-	position:absolute;
+	position	: fixed;
 	background-color : Silver;
-	border : 1px solid black;
-	width : 500px;
-	font-family : Consolas;
-	font-size : 12px;
+	border		: 1px solid black;
+	width		: 500px;
+	font-family	: Consolas;
+	font-size	: 12px;
 }
 #toggle-sql-log
 {
-	position:absolute;
-	bottom:0;
-	left:0;
+	position	: fixed;
+	bottom		: 2px;
+	left		: 2px;
+	padding		: 2px;
+	background	: #EEEEEE none repeat scroll 0 0;
+	color		: #AAAAAA;
+	cursor		: pointer;
 }
 
 div.person-profile h5

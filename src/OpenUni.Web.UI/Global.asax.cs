@@ -8,6 +8,7 @@ using System.Web;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework.Config;
 using Castle.Components.DictionaryAdapter;
+using Castle.Facilities.FactorySupport;
 using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
 using Castle.MonoRail.Framework;
@@ -22,6 +23,8 @@ using Castle.MonoRail.WindsorExtension;
 using Castle.Tools.CodeGenerator.External;
 using Castle.Windsor;
 using D9.Commons;
+using NHibernate;
+using NHibernate.Context;
 using OpenUni.Domain.Departments;
 using OpenUni.Domain.Impl.Repositories;
 using OpenUni.Domain.Modules;
@@ -30,6 +33,7 @@ using OpenUni.Web.UI.Controllers;
 using OpenUni.Web.UI.Services.Authentication;
 using OpenUni.Web.UI.SiteMap;
 using System.Linq;
+using IFilter=Castle.MonoRail.Framework.IFilter;
 
 namespace OpenUni.Web.UI
 {
@@ -57,10 +61,33 @@ namespace OpenUni.Web.UI
 		private static void InitialiseActiveRecord()
 		{
 			ActiveRecordStarter.Initialize(typeof(Department).Assembly, ActiveRecordSectionHandler.Instance);
+			sessionFactory = ActiveRecordMediator.GetSessionFactoryHolder().GetConfiguration(typeof(ActiveRecordBase)).BuildSessionFactory();
+			container.Register(Component.For<ISessionFactory>().Instance(sessionFactory));
+		}
+
+		private static ISessionFactory sessionFactory;
+
+		static void RegisterFactoryMethod<T>(Func<T> factoryMethod)
+		{
+			var factory = new GenericFactory<T>(factoryMethod);
+			var factoryName = factory.GetType().FullName;
+			container.Register(Component.For<GenericFactory<T>>()
+								.Instance(factory)
+								.Named(factoryName),
+							   Component.For<T>()
+								.Attribute("factoryId").Eq(factoryName)
+								.Attribute("factoryCreate").Eq("Create")
+								.LifeStyle.Transient);
 		}
 
 		private static void RegisterComponents()
 		{
+			container.AddFacility("FactorySupportFacility", new FactorySupportFacility());
+
+			RegisterFactoryMethod(() => MonoRailHttpHandlerFactory.CurrentEngineContext);
+
+			//RegisterFactoryMethod(() => sessionFactory.GetCurrentSession());
+	
 			container.Register(
 				AllTypes.Of<Controller>().
 					FromAssembly(typeof(HomeController).Assembly),
@@ -94,15 +121,6 @@ namespace OpenUni.Web.UI
 
 		private static void InitialiseRoutes()
 		{
-			//RoutingModuleEx.Engine.Add(new PatternRoute("<controller>/<action>"));
-			/*
-			RoutingModuleEx.Engine.Add(
-						new PatternRoute("Home", "/[controller]")
-								.DefaultForController().Is("Home")
-								.DefaultForArea().IsEmpty
-								.DefaultForAction().Is("Index")
-						);
-			*/
 			var routes = typeof(RouteDefinitions).GetProperties(BindingFlags.Static | BindingFlags.Public)
 				.Where(p => p.PropertyType.Name.EndsWith("Route"))
 				.Select(r => r.GetGetMethod().Invoke(null, null));
@@ -114,6 +132,8 @@ namespace OpenUni.Web.UI
 				RoutingModuleEx.Engine.Add((IRoutingRule)r);
 
 		}
+
+		private const string SESSION_KEY = "SESSION_KEY";
 
 		protected void Session_Start(object sender, EventArgs e)
 		{
@@ -132,11 +152,32 @@ namespace OpenUni.Web.UI
 				log4net.GlobalContext.Properties["request_id"] = Context.Request.GetHashCode();
 		}
 
+		protected void Application_EndRequest(object sender, EventArgs e)
+		{
+			if (ManagedWebSessionContext.HasBind(Context, sessionFactory) == false)
+				return;
+			var session = sessionFactory.GetCurrentSession();// Context.Items[SESSION_KEY] as ISession;
+			if (session==null)
+				return;
+			if (session.IsOpen)
+				session.Close();
+			session.Dispose();
+			ManagedWebSessionContext.Unbind(Context, sessionFactory);
+			//Context.Items.Remove(SESSION_KEY);
+		}
+
 		protected void Application_BeginRequest(object sender, EventArgs e)
 		{
 			SetSqlLogging();
 
 			SetIsraelCulture();
+
+			if (Context.Request.Url.PathAndQuery.IndexOf("sqllog",StringComparison.InvariantCultureIgnoreCase) > -1)
+				return;
+
+			var session = sessionFactory.OpenSession();
+			ManagedWebSessionContext.Bind(Context, session);
+			//Context.Items[SESSION_KEY] = session;
 		}
 
 		private static void SetIsraelCulture()
@@ -194,21 +235,18 @@ namespace OpenUni.Web.UI
 		}
 	}
 
-	internal class HomepageRulzComparer : IComparer<string>
+	internal class GenericFactory<T>
 	{
-		readonly StringComparer comparer = StringComparer.Ordinal;
-		public int Compare(string x, string y)
+		readonly Func<T> factoryMethod;
+
+		public GenericFactory(Func<T> factoryMethod)
 		{
-			if (IsHomepage(x))
-				return 1;
-			if (IsHomepage(y))
-				return -1;
-			return comparer.Compare(x, y);
+			this.factoryMethod = factoryMethod;
 		}
 
-		static bool IsHomepage(string str)
+		public T Create()
 		{
-			return "homepage".Equals(str, StringComparison.InvariantCultureIgnoreCase);
+			return factoryMethod();
 		}
 	}
 }

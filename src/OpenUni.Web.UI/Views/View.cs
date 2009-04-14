@@ -33,7 +33,7 @@ namespace OpenUni.Web.UI.Views
 
 		protected string ModuleUrl(Module module)
 		{
-			return Routes.ModuleById(module.Id, module.Name.Replace(":", ""));
+			return Routes.ModuleById(module.Id, module.UrlFriendlyName);
 		}
 
 		/// <summary>
