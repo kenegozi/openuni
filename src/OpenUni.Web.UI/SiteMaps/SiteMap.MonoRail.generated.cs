@@ -154,6 +154,11 @@ namespace OpenUni.Web.UI.SiteMap {
             return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.SqlLogController), "", "SqlLog", "View", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.SqlLogController), "View", new System.Type[] {
                             typeof(int)}), new Castle.Tools.CodeGenerator.External.ActionArgument[0]);
         }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerActionReference Cache() {
+            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.SqlLogController), "", "SqlLog", "Cache", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.SqlLogController), "Cache", new System.Type[0]), new Castle.Tools.CodeGenerator.External.ActionArgument[0]);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]

@@ -29,7 +29,7 @@ namespace OpenUni.Web.UI.Controllers
 		[PatternRoute("ModuleById", "modules/<moduleId:int>/[moduleName]")]
 		public void Show(int moduleId, string moduleName)
 		{
-			var module = modulesRepository.Get(moduleId);
+			var module = modulesRepository.GetBy(moduleId);
 			if (module == null)
 			{
 				Error404();
@@ -46,7 +46,8 @@ namespace OpenUni.Web.UI.Controllers
 
 			var view = Typed<IModuleView>();
 			view.Module = module;
-
+			
+			view.PrerequisitedModules = modulesRepository.AllPrerequisitesFor(module.Id);
 		}
 	}
 }

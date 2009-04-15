@@ -21,8 +21,10 @@ namespace OpenUni.Domain.Modules
 		/// </summary>
 		/// <param name="id">The id of the module</param>
 		/// <returns>Module with Id = id</returns>
-		Module Get(int id);
+		Module GetBy(int id);
 
 		IEnumerable<Module> AllFor(Person person);
+
+		IEnumerable<ModuleInfoHierarchical> AllPrerequisitesFor(int id);
 	}
 }

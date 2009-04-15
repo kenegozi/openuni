@@ -154,3 +154,15 @@ div.person-profile h5
 	margin-top:10px;
 }
 
+.module-details span.caption
+{
+	font-weight	: bold;
+}
+.module-details p
+{
+	padding	: 5px 0;
+}
+.module-details ul
+{
+	padding	: 0;
+}

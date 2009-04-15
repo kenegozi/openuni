@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" Inherits="OpenUni.Web.UI.Views.View<IModuleView>" %>
 <%@ Import Namespace="OpenUni.Web.UI.Views.Modules"%>
 
-<div class="module-details>
+<div class="module-details">
 	<h3><%=view.Module.Name %> (<%=view.Module.Id %>)</h3>
 	<p>
 		<span class="caption">שיוך: </span>
@@ -15,6 +15,18 @@
 		<span class="caption">מרכז: </span>
 		<a href="<%=ProfileUrl(view.Module.Director)%>"><%=view.Module.Director.FullName%></a>
 	</p>
-	<p class="description">	<%=view.Module.Description %></p>
-	
+	<p class="description">	
+		<span class="caption">דרישות קדם:</span>
+		<ul>
+		<%foreach(var m in view.Module.PrerequisitedModules){ %>
+			<li>
+				<a href="<%=ModuleUrl(m) %>"><%=m %></a>
+			</li>
+		<%} %>
+		</ul>
+	</p>
+	<p class="description">	
+		<span class="caption">תיאור הקורס:</span><br />
+		<%=view.Module.Description %>
+	</p>
 </div>

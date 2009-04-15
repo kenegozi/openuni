@@ -1,13 +1,15 @@
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Web;
 using Castle.ActiveRecord;
+using D9.Commons;
 using OpenUni.Domain.Departments;
 using OpenUni.Domain.People;
+using OpenUni.Domain.Extensions;
 
 namespace OpenUni.Domain.Modules
 {
-	[ActiveRecord]
-	[Import(typeof(ModuleInfo), "ModuleInfo")]
+	[ActiveRecord(Cache = CacheEnum.ReadWrite)]
 	public class Module
 	{
 		private int id;
@@ -39,9 +41,8 @@ namespace OpenUni.Domain.Modules
 
 		public virtual string UrlFriendlyName
 		{
-			get { return nonUrlFriendly.Replace(Name, ""); }
+			get { return Name.Friendlify(); }
 		}
-		static readonly Regex nonUrlFriendly = new Regex("[^-a-zà-ú0-9 _,]", RegexOptions.Compiled | RegexOptions.IgnoreCase); 
 
 		[Property]
 		public virtual string Description { get; set; }
@@ -58,7 +59,15 @@ namespace OpenUni.Domain.Modules
 			get { return moduleType; }
 		}
 
+		[HasAndBelongsToMany(Table = "ModulePrerequisites", ColumnKey = "PrerequisitedModuleId", ColumnRef = "ModuleId")]
+		public virtual IList<Module> PrerequisitedModules { get; private set; }
+
 		[BelongsTo("DirectorId")]
 		public virtual StaffMember Director { get; set; }
+
+		public override string ToString()
+		{
+			return "{0} ({1}) - {2}".Apply(Name, Enums.GetDescriptionOf(moduleType), Id);
+		}
 	}
 }

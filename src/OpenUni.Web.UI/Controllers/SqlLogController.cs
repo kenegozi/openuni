@@ -39,6 +39,24 @@ namespace OpenUni.Web.UI.Controllers
 			PropertyBag["Queries"] = queries;
 		}
 
+		public void Cache()
+		{
+			var str = "<table>";
+			foreach (var item in Context.UnderlyingContext.Cache)
+			{
+				var key = ((System.Collections.DictionaryEntry) item).Key;
+				var value = ((System.Collections.DictionaryEntry)item).Value;
+				if (value is System.Collections.DictionaryEntry)
+				{
+					value = ((System.Collections.DictionaryEntry) value).Key
+					        + " - " + ((System.Collections.DictionaryEntry) value).Value;
+				}
+				str += "<tr><td>" + key + "</td><td>" + value + "</td></tr>";
+			}
+			str += "</table>";
+			RenderText(str);
+		}
+
 		public class DateAndMessage
 		{
 			public DateTime Date { get; set; }

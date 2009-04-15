@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace OpenUni.Domain.Extensions
 {
 	public static class StringExtensionMethods
@@ -11,5 +13,13 @@ namespace OpenUni.Domain.Extensions
 		{
 			return string.Format(format, arguments);
 		}
+
+		public static string Friendlify(this string url)
+		{
+			return nonUrlFriendly.Replace(url, ""); ;
+		}
+
+		static readonly Regex nonUrlFriendly = new Regex("[^-a-zà-ú0-9 _,]", RegexOptions.Compiled | RegexOptions.IgnoreCase); 
+
 	}
 }
