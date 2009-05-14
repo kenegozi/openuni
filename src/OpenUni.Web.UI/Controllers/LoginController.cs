@@ -74,8 +74,7 @@ namespace OpenUni.Web.UI.Controllers
 
 		void RedirectUserToDefaultPage(Person person)
 		{
-			if (person.IsInRole(Roles.))
-			if (person is StaffMember)
+			if (person.IsInRole(Roles.Staff))
 			{
 				//RedirectToStaffMemberPanel
 				return;				
