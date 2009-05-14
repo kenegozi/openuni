@@ -70,6 +70,7 @@
     <Compile Include="People\AddressInfo.cs" />
     <Compile Include="People\Person.cs" />
     <Compile Include="People\Professor.cs" />
+    <Compile Include="People\Roles.cs" />
     <Compile Include="People\StaffMember.cs" />
     <Compile Include="People\Student.cs" />
     <Compile Include="People\IPeopleRepository.cs" />

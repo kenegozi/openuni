@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="OpenUni.Web.UI.Views.View<IDefaultLayout>" %>
+<%@ Import Namespace="OpenUni.Web.UI.Controllers"%>
 <%@ Import Namespace="OpenUni.Web.UI.Views.Layouts"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -13,7 +14,10 @@
 <body>
     <div class="rtl" >
 		<div id="canvas">
-			<div id="header"><h1>האוניברסיטה</h1></div>
+			<div id="header">
+				<h1>האוניברסיטה</h1>
+				<subview:loginbox></subview:loginbox>
+			</div>
 			<div id="content">
 				<%=ViewContents %>
 				<div id="menu">

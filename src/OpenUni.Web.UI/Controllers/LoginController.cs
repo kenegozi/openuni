@@ -1,3 +1,4 @@
+using System;
 using Castle.MonoRail.Framework;
 using Castle.Tools.CodeGenerator.External;
 
@@ -73,6 +74,7 @@ namespace OpenUni.Web.UI.Controllers
 
 		void RedirectUserToDefaultPage(Person person)
 		{
+			if (person.IsInRole(Roles.))
 			if (person is StaffMember)
 			{
 				//RedirectToStaffMemberPanel

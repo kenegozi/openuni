@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" Inherits="OpenUni.Web.UI.Views.View<IIndexView>" %>
+﻿
+<%@ Page Language="C#" Inherits="OpenUni.Web.UI.Views.View<IIndexView>" %>
 <%@ Import Namespace="OpenUni.Web.UI.Views.Home"%>
 <div id="about">
 <p>אתר המדגים מערכת ניהול לאוניברסיטה</p>
@@ -11,7 +12,7 @@
 	<p>מנהל בסיס נתונים</p>
 	<ul> 
 		<li><a href="http://www.microsoft.com/sql/editions/express/default.mspx">Microsoft SQL Server 2005</a></li>
-		<li><a href="http://astore.amazon.com/kenegoziswebl-20/detail/0735623139/104-7351294-0847102">T-SQL Language</a></li>
+		<li><a href="http://www.amazon.com/dp/0735623139?tag=kenegoziswebl-20">T-SQL Language</a></li>
 	</ul>
 </div>
 
@@ -29,9 +30,7 @@
 	<p>Data Access</p>
 	<ul>
 		<li><a href="http://www.nhforge.org">NHibernate 2.1</a></li>
-		<li><a href="http://ayende.com/Blog/archive/2006/07/31/IntroducingTheNHibernateQueryGenerator.aspx">NHibernate Query Generator</a></li>
 		<li><a href="http://en.wikipedia.org/wiki/Language_Integrated_Query">Linq for NHibernate</a></li>
-		<li><a href="http://www.kenegozi.com/Blog/2008/01/27/already-added-stuff-to-sql-query-generator.aspx">QuerySpecBuilder</a></li>
 	</ul>
 </div>
 

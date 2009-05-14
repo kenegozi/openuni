@@ -250,6 +250,15 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         /// <summary>
+        /// /[controller]
+        /// </summary>
+        public static HomepageRoute Homepage {
+            get {
+                return ((HomepageRoute)(new HomepageRoute().DefaultForArea().Is("").DefaultForController().Is<OpenUni.Web.UI.Controllers.HomeController>().DefaultForAction().Is("Index")));
+            }
+        }
+        
+        /// <summary>
         /// /about
         /// </summary>
         public static aboutRoute about {
@@ -352,6 +361,24 @@ namespace OpenUni.Web.UI.SiteMap {
             
             [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
             public partial class OptionalParameters {
+            }
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+        public partial class HomepageRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
+            
+            public HomepageRoute() : 
+                    base("Homepage", "/[controller]") {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class RequiredParameters {
+            }
+            
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
+            public partial class OptionalParameters {
+                
+                public const string controller = "controller";
             }
         }
         
@@ -516,6 +543,15 @@ namespace OpenUni.Web.UI.SiteMap {
             System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
             routeParameters.Add("departmentName", departmentName);
             return RouteDefinitions.DepartmentByName.CreateUrl(routeParameters);
+        }
+        
+        /// <summary>
+        /// /[controller]
+        /// </summary>
+        public virtual string Homepage(string controller) {
+            System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
+            routeParameters.Add("controller", controller);
+            return RouteDefinitions.Homepage.CreateUrl(routeParameters);
         }
         
         /// <summary>

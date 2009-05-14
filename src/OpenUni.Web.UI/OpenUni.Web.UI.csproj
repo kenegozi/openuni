@@ -120,6 +120,7 @@
     <Content Include="Views\Hello\World.aspx" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Layouts\LoginBox.aspx" />
     <Content Include="Views\Layouts\Portal.aspx" />
     <Content Include="Views\Layouts\Default.aspx" />
     <Content Include="Views\Login\Login.aspx" />
@@ -138,6 +139,7 @@
     <Compile Include="Controllers\AbstractController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\Admin\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\People\Areas.cs" />

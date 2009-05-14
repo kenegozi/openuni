@@ -51,5 +51,13 @@ namespace OpenUni.Domain.People
 		[Property]
 		public virtual string Password { get; set; }
 
+		[Property]
+		public virtual Roles Roles { get; set; }
+
+		public virtual bool IsInRole(Roles role)
+		{
+			return (Roles & role) == role;
+		}
+
 	}
 }

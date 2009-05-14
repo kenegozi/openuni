@@ -121,16 +121,17 @@ namespace OpenUni.Web.UI
 
 		private static void InitialiseRoutes()
 		{
+			
 			var routes = typeof(RouteDefinitions).GetProperties(BindingFlags.Static | BindingFlags.Public)
 				.Where(p => p.PropertyType.Name.EndsWith("Route"))
 				.Select(r => r.GetGetMethod().Invoke(null, null));
 
-			var homepageRoute = new HomepageRoute("Homepage");
-			RoutingModuleEx.Engine.Add(homepageRoute);
+			//var homepageRoute = new HomepageRoute("Homepage");
+			//RoutingModuleEx.Engine.Add(homepageRoute);
 
 			foreach (var r in routes)
 				RoutingModuleEx.Engine.Add((IRoutingRule)r);
-
+			
 		}
 
 		private const string SESSION_KEY = "SESSION_KEY";
@@ -217,13 +218,15 @@ namespace OpenUni.Web.UI
 			configuration.ViewEngineConfig.ViewPathRoot = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Views");
 			configuration.ViewEngineConfig.ViewEngines.Add(new ViewEngineInfo(typeof(AspViewEngine), false));
 
-			configuration.JSGeneratorConfiguration.AddLibrary("jquery-1.2.1", typeof(JQueryGenerator))
-	.AddExtension(typeof(CommonJSExtension))
-	.ElementGenerator
-		.AddExtension(typeof(JQueryElementGenerator))
-		.Done
-	.BrowserValidatorIs(typeof(JQueryValidator))
-	.SetAsDefault();
+			configuration.JSGeneratorConfiguration.AddLibrary("jquery-1.2.1", typeof (JQueryGenerator))
+				.AddExtension(typeof (CommonJSExtension))
+				.ElementGenerator
+				.AddExtension(typeof (JQueryElementGenerator))
+				.Done
+				.BrowserValidatorIs(typeof (JQueryValidator))
+				.SetAsDefault();
+
+			configuration.UrlConfig.UseExtensions = false;
 
 		}
 

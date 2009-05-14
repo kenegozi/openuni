@@ -14,7 +14,7 @@ namespace OpenUni.Web.UI.Controllers
 	[Layout(Layouts.DEFAULT)]
 	public partial class HomeController : AbstractController
 	{
-//		[PatternRoute("Homepage", "/[controller]")]
+		[PatternRoute("Homepage", "/[controller]")]
 		public void Index()
 		{
 		}
