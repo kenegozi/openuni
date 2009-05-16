@@ -20,11 +20,16 @@ namespace OpenUni.Web.UI.Controllers.Portal
 			this.modulesRepository = modulesRepository;
 		}
 
-		[PatternRoute("PortalMyModules", "/portal/modules")]
 		public void MyModules()
 		{
 			var person = Session["Person"] as Person;
 			PropertyBag["MyModules"] = modulesRepository.AllFor(person);
+		}
+
+        public void Register()
+        {
+			var person = Session["Person"] as Person;
+			PropertyBag["Modules"] = modulesRepository.AllFor(2009, 3);
 		}
 
 	}

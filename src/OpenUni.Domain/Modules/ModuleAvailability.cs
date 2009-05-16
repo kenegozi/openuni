@@ -1,3 +1,4 @@
+using System;
 using Castle.ActiveRecord;
 
 namespace OpenUni.Domain.Modules
@@ -5,7 +6,6 @@ namespace OpenUni.Domain.Modules
 	[ActiveRecord("ModulesAvailability")]
 	public class ModuleAvailability
 	{
-		private int id;
 		Module module;
 		int year;
 		byte termNo;
@@ -21,11 +21,8 @@ namespace OpenUni.Domain.Modules
 			this.termNo = termNo;
 		}
 
-		[PrimaryKey(PrimaryKeyType.Assigned, Access = PropertyAccess.NosetterCamelcase)]
-		public virtual int Id
-		{
-			get { return id; }
-		}
+		[PrimaryKey(PrimaryKeyType.GuidComb)]
+		public virtual Guid Id { get; private set; }
 
 		[BelongsTo("ModuleId", Access = PropertyAccess.NosetterCamelcase)]
 		public virtual Module Module

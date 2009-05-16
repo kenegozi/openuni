@@ -74,12 +74,13 @@ namespace OpenUni.Web.UI.Controllers
 
 		void RedirectUserToDefaultPage(Person person)
 		{
+			RedirectToUrl("/");
+			return;
 			if (person.IsInRole(Roles.Staff))
 			{
 				//RedirectToStaffMemberPanel
 				return;				
 			}
-			RedirectUsingNamedRoute(RouteDefinitions.PortalHome.RouteName);
 		}
 
 		void TryAgain(string returnUrl, int icn, string username)

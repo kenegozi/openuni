@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using NHibernate.Transform;
@@ -20,6 +21,21 @@ namespace OpenUni.Domain.Impl.Repositories
 				.List<Module>();
 		}
 
+		public IEnumerable<ModuleAvailability> AllFor(int year, byte term)
+        {
+            var q = @"
+				select a
+				from ModuleAvailability a
+				where   a.Year = :year
+                    and a.TermNo = :term
+				
+			";
+            return Session.CreateQuery(q)
+                .SetInt32("year", year)
+                .SetByte("term", term)
+				.List<ModuleAvailability>();
+        }
+
 		public IEnumerable<Module> AllFor(Person person)
 		{
 			var q = @"
@@ -35,7 +51,7 @@ namespace OpenUni.Domain.Impl.Repositories
 				.List<Module>();
 		}
 
-		private static ConstructorInfo hierarchicalModuleInfoCtor =
+		private static readonly ConstructorInfo HierarchicalModuleInfoCtor =
 			typeof (ModuleInfoHierarchical).GetConstructor(new[] {typeof (int), typeof (string), typeof (string), typeof (int)});
 		public IEnumerable<ModuleInfoHierarchical> AllPrerequisitesFor(int id)
 		{
@@ -53,7 +69,7 @@ select Id, Name, ModuleType, Level from Data
 ";
 			return Session.CreateSQLQuery(q)
 				.SetInt32("id", id)
-				.SetResultTransformer(Transformers.AliasToBeanConstructor(hierarchicalModuleInfoCtor))
+				.SetResultTransformer(Transformers.AliasToBeanConstructor(HierarchicalModuleInfoCtor))
 				.List<ModuleInfoHierarchical>();
 
 		}

@@ -189,6 +189,11 @@ namespace OpenUni.Web.UI.SiteMap {
         public virtual Castle.Tools.CodeGenerator.External.IControllerActionReference MyModules() {
             return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Portal", "Modules", "MyModules", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "MyModules", new System.Type[0]), new Castle.Tools.CodeGenerator.External.ActionArgument[0]);
         }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerActionReference Register() {
+            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Portal", "Modules", "Register", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Register", new System.Type[0]), new Castle.Tools.CodeGenerator.External.ActionArgument[0]);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
@@ -300,24 +305,6 @@ namespace OpenUni.Web.UI.SiteMap {
         public static SqlLogRoute SqlLog {
             get {
                 return ((SqlLogRoute)(new SqlLogRoute().DefaultForArea().Is("").DefaultForController().Is<OpenUni.Web.UI.Controllers.SqlLogController>().DefaultForAction().Is("View")));
-            }
-        }
-        
-        /// <summary>
-        /// /portal
-        /// </summary>
-        public static PortalHomeRoute PortalHome {
-            get {
-                return ((PortalHomeRoute)(new PortalHomeRoute().DefaultForArea().Is("Portal").DefaultForController().Is<OpenUni.Web.UI.Controllers.Portal.HomeController>().DefaultForAction().Is("Index")));
-            }
-        }
-        
-        /// <summary>
-        /// /portal/modules
-        /// </summary>
-        public static PortalMyModulesRoute PortalMyModules {
-            get {
-                return ((PortalMyModulesRoute)(new PortalMyModulesRoute().DefaultForArea().Is("Portal").DefaultForController().Is<OpenUni.Web.UI.Controllers.Portal.ModulesController>().DefaultForAction().Is("MyModules")));
             }
         }
         
@@ -467,38 +454,6 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-        public partial class PortalHomeRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
-            
-            public PortalHomeRoute() : 
-                    base("PortalHome", "/portal") {
-            }
-            
-            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-            public partial class RequiredParameters {
-            }
-            
-            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-            public partial class OptionalParameters {
-            }
-        }
-        
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-        public partial class PortalMyModulesRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
-            
-            public PortalMyModulesRoute() : 
-                    base("PortalMyModules", "/portal/modules") {
-            }
-            
-            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-            public partial class RequiredParameters {
-            }
-            
-            [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
-            public partial class OptionalParameters {
-            }
-        }
-        
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]
         public partial class ProfileByPersonDetailsRoute : Castle.MonoRail.Framework.Routing.PatternRoute {
             
             public ProfileByPersonDetailsRoute() : 
@@ -594,22 +549,6 @@ namespace OpenUni.Web.UI.SiteMap {
         public virtual string SqlLog() {
             System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
             return RouteDefinitions.SqlLog.CreateUrl(routeParameters);
-        }
-        
-        /// <summary>
-        /// /portal
-        /// </summary>
-        public virtual string PortalHome() {
-            System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
-            return RouteDefinitions.PortalHome.CreateUrl(routeParameters);
-        }
-        
-        /// <summary>
-        /// /portal/modules
-        /// </summary>
-        public virtual string PortalMyModules() {
-            System.Collections.IDictionary routeParameters = Castle.MonoRail.Framework.Helpers.DictHelper.Create();
-            return RouteDefinitions.PortalMyModules.CreateUrl(routeParameters);
         }
         
         /// <summary>
@@ -829,6 +768,13 @@ namespace OpenUni.Web.UI.SiteMap {
         public virtual Castle.Tools.CodeGenerator.External.IControllerViewReference MyModules {
             get {
                 return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Portal", "Modules", "MyModules");
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerViewReference Register {
+            get {
+                return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Portal", "Modules", "Register");
             }
         }
     }

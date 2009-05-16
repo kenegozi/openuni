@@ -131,7 +131,12 @@ namespace OpenUni.Web.UI
 
 			foreach (var r in routes)
 				RoutingModuleEx.Engine.Add((IRoutingRule)r);
-			
+
+			RoutingModuleEx.Engine.Add(new PatternRoute("All", "/<controller>/<action>")
+				.DefaultForArea().IsEmpty);
+			RoutingModuleEx.Engine.Add(new PatternRoute("AllWithArea", "/<area>/<controller>/<action>")
+				);
+
 		}
 
 		private const string SESSION_KEY = "SESSION_KEY";
