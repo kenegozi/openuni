@@ -50,4 +50,11 @@ namespace OpenUni.Domain.Modules
 
 
 	}
+
+	class MyClass
+	{
+		public Module module;
+		public int Capacity;
+		public int Openings;
+	}
 }

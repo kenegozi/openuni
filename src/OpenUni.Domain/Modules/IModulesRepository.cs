@@ -23,7 +23,7 @@ namespace OpenUni.Domain.Modules
         /// <returns>Module with Id = id</returns>
         Module GetBy(int id);
 
-        IEnumerable<ModuleAvailability> AllFor(int year, byte term);
+		IEnumerable<object[]> AllFor(int year, byte term);
 
         IEnumerable<Module> AllFor(Person person);
 

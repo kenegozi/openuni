@@ -21,19 +21,23 @@ namespace OpenUni.Domain.Impl.Repositories
 				.List<Module>();
 		}
 
-		public IEnumerable<ModuleAvailability> AllFor(int year, byte term)
+		public IEnumerable<object[]> AllFor(int year, byte term)
         {
             var q = @"
-				select a
-				from ModuleAvailability a
-				where   a.Year = :year
-                    and a.TermNo = :term
-				
+SELECT a.ModuleId, m.Name, a.Capacity, COUNT(mr.Id)
+FROM
+				ModuleRegistrations mr 
+	RIGHT JOIN	ModulesAvailability a ON mr.ModuleAvailabilityId = a.Id
+	RIGHT JOIN	Modules m on m.Id = a.ModuleId
+WHERE   a.Year = :year
+	AND a.TermNo = :term
+GROUP BY a.ModuleId, m.Name, a.Capacity
+HAVING COUNT(mr.Id) < a.Capacity				
 			";
-            return Session.CreateQuery(q)
+            return Session.CreateSQLQuery(q)
                 .SetInt32("year", year)
                 .SetByte("term", term)
-				.List<ModuleAvailability>();
+				.List<object[]>();
         }
 
 		public IEnumerable<Module> AllFor(Person person)
