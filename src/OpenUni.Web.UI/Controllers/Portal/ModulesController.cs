@@ -19,7 +19,7 @@ namespace OpenUni.Web.UI.Controllers.Portal
 		public int AlreadyRegistered { get; set;}
 	}
 	[ControllerDetails(Area = "Portal")]
-	[Layout(Layouts.PORTAL)]
+	[Layout(Layouts.XHTML, Layouts.PORTAL)]
 	[StudentsOnly]
 	public partial class ModulesController : AbstractController
 	{

@@ -166,3 +166,13 @@ div.person-profile h5
 {
 	padding	: 0;
 }
+
+table#module-options th
+{
+	padding-right	: 10px;
+}
+table#module-options tr:hover td
+{
+	background-color: #FFB;
+	cursor			: pointer;
+}

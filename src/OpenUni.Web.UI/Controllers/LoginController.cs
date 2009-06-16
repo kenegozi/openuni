@@ -13,7 +13,7 @@ namespace OpenUni.Web.UI.Controllers
 	/// <summary>
 	/// Login logic
 	/// </summary>
-	[Layout(Layouts.DEFAULT)]
+	[Layout(Layouts.XHTML, Layouts.DEFAULT)]
 	public partial class LoginController : AbstractController<ILoginView>
 	{
 		#region DI

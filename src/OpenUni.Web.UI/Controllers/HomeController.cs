@@ -11,7 +11,7 @@ using System.Web;
 
 namespace OpenUni.Web.UI.Controllers
 {
-	[Layout(Layouts.DEFAULT)]
+	[Layout(Layouts.XHTML, Layouts.DEFAULT)]
 	public partial class HomeController : AbstractController
 	{
 		[PatternRoute("Homepage", "/[controller]")]

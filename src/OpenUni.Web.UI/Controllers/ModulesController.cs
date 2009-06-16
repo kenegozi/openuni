@@ -9,7 +9,7 @@ using OpenUni.Web.UI.Views.Modules;
 
 namespace OpenUni.Web.UI.Controllers
 {
-	[Layout(Layouts.DEFAULT)]
+	[Layout(Layouts.XHTML, Layouts.DEFAULT)]
 	public partial class ModulesController : AbstractController
 	{
 		private readonly IModulesRepository modulesRepository;

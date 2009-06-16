@@ -6,7 +6,7 @@ using OpenUni.Web.UI.Views.Layouts;
 
 namespace OpenUni.Web.UI.Controllers
 {
-	[Layout(Layouts.DEFAULT)]
+	[Layout(Layouts.XHTML, Layouts.DEFAULT)]
 	public partial class DepartmentsController : AbstractController
 	{
 		private readonly IDepartmentsRepository departmentsRepository;

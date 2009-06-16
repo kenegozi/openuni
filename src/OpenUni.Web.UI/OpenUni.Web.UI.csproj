@@ -128,6 +128,9 @@
     <Content Include="Static\js\jquery\jquery-1.2.6.min.js" />
     <Content Include="Static\js\jquery\jquery-1.3.2.min.js" />
     <Content Include="Static\js\jquery\jquery-ui-1.7.1.custom.min.js" />
+    <Content Include="Static\js\jquery\jquery.ui.autocomplete.css" />
+    <Content Include="Static\js\jquery\jquery.ui.autocomplete.ext.js" />
+    <Content Include="Static\js\jquery\jquery.ui.autocomplete.js" />
     <Content Include="Static\js\jquery\jquery.validate.min.js" />
     <Content Include="Static\styles\default.css" />
     <Content Include="Views\Departments\Index.aspx" />
@@ -137,6 +140,7 @@
     <Content Include="Views\Hello\World.aspx" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Layouts\XHTML.aspx" />
     <Content Include="Views\Layouts\LoginBox.aspx" />
     <Content Include="Views\Layouts\Portal.aspx" />
     <Content Include="Views\Layouts\Default.aspx" />
