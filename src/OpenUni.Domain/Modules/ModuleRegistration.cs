@@ -22,7 +22,7 @@ namespace OpenUni.Domain.Modules
 			this.moduleAvailability = moduleAvailability;
 		}
 
-		[PrimaryKey]
+		[PrimaryKey(PrimaryKeyType.GuidComb)]
 		public virtual Guid Id { get; protected set;}
 
 		[BelongsTo("StudentId", Access = PropertyAccess.NosetterCamelcase)]
