@@ -191,6 +191,22 @@ namespace OpenUni.Web.UI.SiteMap {
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerActionReference Register(int moduleId, int year, byte term) {
+            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Portal", "Modules", "Register", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Register", new System.Type[] {
+                            typeof(int),
+                            typeof(int),
+                            typeof(byte)}), new Castle.Tools.CodeGenerator.External.ActionArgument[] {
+                        new Castle.Tools.CodeGenerator.External.ActionArgument(0, "moduleId", typeof(int), moduleId),
+                        new Castle.Tools.CodeGenerator.External.ActionArgument(1, "year", typeof(int), year),
+                        new Castle.Tools.CodeGenerator.External.ActionArgument(2, "term", typeof(byte), term)});
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerActionReference Registered() {
+            return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Portal", "Modules", "Registered", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Registered", new System.Type[0]), new Castle.Tools.CodeGenerator.External.ActionArgument[0]);
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public virtual Castle.Tools.CodeGenerator.External.IControllerActionReference Register() {
             return this._services.ControllerReferenceFactory.CreateActionReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Portal", "Modules", "Register", new Castle.Tools.CodeGenerator.External.MethodSignature(typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Register", new System.Type[0]), new Castle.Tools.CodeGenerator.External.ActionArgument[0]);
         }
@@ -775,6 +791,13 @@ namespace OpenUni.Web.UI.SiteMap {
         public virtual Castle.Tools.CodeGenerator.External.IControllerViewReference Register {
             get {
                 return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Portal", "Modules", "Register");
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerViewReference Registered {
+            get {
+                return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.Portal.ModulesController), "Portal", "Modules", "Registered");
             }
         }
     }

@@ -7,9 +7,11 @@
 <script runat="server" type="aspview/properties">
 	IEnumerable<ModuleChooseInfo> Modules;
 	string TermString;
+	int Year;
+	byte Term;
 </script>
 הרשמה לקורס לסמסטר <%=TermString %>:<br />
-בחר קורס: <input id="module" style="width:400px"/><br />
+חפש קורס (לפי שם או מספר): <input id="module" style="width:400px"/><br />
 <table id="module-options">
 	<thead>
 		<tr>
@@ -19,6 +21,14 @@
 	</thead>
 	<tbody></tbody>
 </table>
+<form id="registration-form" action="register" method="post" style="display:none">
+<span></span><br />
+<input type="hidden" name="moduleId" id="moduleId" />
+<input type="hidden" name="year" value="<%=Year %>" />
+<input type="hidden" name="term" value="<%=Term %>" />
+<input type="submit" value="אישור" />
+<input type="reset" value="חזור" />
+</form>
 <script type="text/javascript">
 var data = [];
 <%foreach (var m in Modules) {%> 
@@ -63,11 +73,40 @@ data.push({
 				}
 
 				$('tr', target).click(function() {
-					alert($(this).find('td')[0].innerHTML);
+					$('#module-options').hide();
+					var form = $('#registration-form');
+					var tds = $(this).find('td');
+					var moduleName = tds[1].innerHTML;
+					var moduleId = tds[0].innerHTML;
+					var moduleTitle = moduleName + ' (' + moduleId + ')';
+					$('span', form).html('הקורס הנבחר הוא: ' + moduleTitle)
+					$('input#moduleId', form).val(moduleId);
+					form.show();
 				});
 			});
-
-
+			$('#registration-form input[type=reset]').click(function() {
+				$('#module-options').show();
+				$('#registration-form').hide()
+			});
+			$('#registration-form input[type=submit]').click(function() {
+				var form = $('#registration-form');
+				var url = form.attr('action');
+				var method = form.attr('method').toUpperCase();
+				var data = {
+					term: form.find('input[name=term]').val(),
+					year: form.find('input[name=year]').val(),
+					moduleId: form.find('input[name=moduleId]').val()
+				};
+				var options = {
+					url: url,
+					data: data,
+					type: method,
+					success: function(msg) { alert(msg); },
+					error: function(err) { alert('error: ' + err); }
+				};
+				$.ajax(options);
+				return false;
+			});
 		});
 	})(jQuery);
 

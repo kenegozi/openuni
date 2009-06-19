@@ -9,7 +9,6 @@ namespace OpenUni.Domain.Modules
 	[ActiveRecord]
 	public class ModuleRegistration
 	{
-		Guid id;
 		Person student;
 		ModuleAvailability moduleAvailability;
 
@@ -23,11 +22,8 @@ namespace OpenUni.Domain.Modules
 			this.moduleAvailability = moduleAvailability;
 		}
 
-		[PrimaryKey(Access = PropertyAccess.NosetterCamelcase)]
-		public virtual Guid Id
-		{
-			get { return id; }
-		}
+		[PrimaryKey]
+		public virtual Guid Id { get; protected set;}
 
 		[BelongsTo("StudentId", Access = PropertyAccess.NosetterCamelcase)]
 		public virtual Person Student

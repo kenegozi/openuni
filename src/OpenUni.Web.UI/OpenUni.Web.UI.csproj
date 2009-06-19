@@ -151,6 +151,7 @@
     <Content Include="Views\People\Profiles\StaffMember.aspx" />
     <Content Include="Views\People\Profiles\Person.aspx" />
     <Content Include="Views\Portal\Home\Index.aspx" />
+    <Content Include="Views\Portal\Modules\Registered.aspx" />
     <Content Include="Views\Portal\Modules\Register.aspx" />
     <Content Include="Views\Portal\Modules\MyModules.aspx" />
     <Content Include="Views\SqlLog\View.aspx" />

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
 using NHibernate.Transform;
@@ -21,7 +22,27 @@ namespace OpenUni.Domain.Impl.Repositories
 				.List<Module>();
 		}
 
-		public IEnumerable<object[]> AllFor(int year, byte term)
+		public ModuleAvailability GetAvailabilityOf(Module module, int year, byte term)
+		{
+			return Session.CreateQuery(@"
+from ModuleAvailability ma
+where	ma.Module = :module
+	and	ma.Year = :year
+	and ma.TermNo = :term
+")
+				.SetEntity("module", module)
+				.SetInt32("year", year)
+				.SetByte("term", term)
+				.List<ModuleAvailability>()
+				.FirstOrDefault();
+		}
+
+		public void SaveRegistraion(ModuleRegistration registration)
+		{
+			Session.Save(registration);
+		}
+
+		public IEnumerable<object[]> AllFor(int year, byte term, Guid studentId)
         {
             var q = @"
 SELECT a.ModuleId, m.Name, a.Capacity, COUNT(mr.Id)
@@ -31,10 +52,17 @@ FROM
 	RIGHT JOIN	Modules m on m.Id = a.ModuleId
 WHERE   a.Year = :year
 	AND a.TermNo = :term
+	AND NOT EXISTS (
+		SELECT 1
+		FROM ModuleRegistrations mr1
+		WHERE	mr1.ModuleAvailabilityId = a.Id
+			AND	mr1.StudentId <> :studentId
+	)
 GROUP BY a.ModuleId, m.Name, a.Capacity
 HAVING COUNT(mr.Id) < a.Capacity				
 			";
             return Session.CreateSQLQuery(q)
+				.SetGuid("studentId", studentId)
                 .SetInt32("year", year)
                 .SetByte("term", term)
 				.List<object[]>();
