@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Specialized;
 using Castle.MonoRail.Framework;
 using OpenUni.Domain.People;
 using OpenUni.Web.UI.SiteMap;
@@ -48,7 +49,7 @@ namespace OpenUni.Web.UI.Filters
 
 		static bool RedirectToLoginPage(IEngineContext context)
 		{
-			context.Response.Redirect("", "Login", "Login");
+			context.Response.Redirect("", "Login", "Login", new {ReturnUrl = context.Request.Url});
 			return false;
 		}
 
