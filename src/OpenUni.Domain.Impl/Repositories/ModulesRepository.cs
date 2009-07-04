@@ -39,7 +39,11 @@ where	ma.Module = :module
 
 		public void SaveRegistraion(ModuleRegistration registration)
 		{
-			Session.Save(registration);
+			using (var tx = Session.BeginTransaction())
+			{
+				Session.Save(registration);
+				tx.Commit();
+			}
 		}
 
 		public IEnumerable<object[]> AllFor(int year, byte term, Guid studentId)
@@ -56,7 +60,7 @@ WHERE   a.Year = :year
 		SELECT 1
 		FROM ModuleRegistrations mr1
 		WHERE	mr1.ModuleAvailabilityId = a.Id
-			AND	mr1.StudentId <> :studentId
+			AND	mr1.StudentId = :studentId
 	)
 GROUP BY a.ModuleId, m.Name, a.Capacity
 HAVING COUNT(mr.Id) < a.Capacity				

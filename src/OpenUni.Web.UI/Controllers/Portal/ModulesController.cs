@@ -46,7 +46,7 @@ namespace OpenUni.Web.UI.Controllers.Portal
 				var module = modulesRepository.GetBy(moduleId);
 				var availability = modulesRepository.GetAvailabilityOf(module, year, term);
 				reg = new ModuleRegistration(person, availability);
-				modulesRepository.SaveRegistraion(reg);
+                modulesRepository.SaveRegistraion(reg);
 				RenderText(reg.Id.ToString());
 			}
 			catch (Exception exception)
