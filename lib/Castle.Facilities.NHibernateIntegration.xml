@@ -2190,6 +2190,64 @@
             <param name="cfg">NHibernate configuration</param>
             <param name="targetAssembly">Target assembly name</param>
         </member>
+        <member name="T:Castle.Facilities.NHibernateIntegration.Internal.DefaultConfigurationPersister">
+            <summary>
+            Knows how to read/write an NH <see cref="T:NHibernate.Cfg.Configuration"/> from
+            a given filename, and whether that file should be trusted or a new
+            Configuration should be built.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.NHibernateIntegration.Internal.IConfigurationPersister">
+            <summary>
+            Knows how to read/write an NH <see cref="T:NHibernate.Cfg.Configuration"/> from
+            a given filename, and whether that file should be trusted or a new
+            Configuration should be built.
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.IConfigurationPersister.ReadConfiguration(System.String)">
+            <summary>
+            Gets the <see cref="T:NHibernate.Cfg.Configuration"/> from the file.
+            </summary>
+            <param name="filename">The name of the file to read from</param>
+            <returns>The <see cref="T:NHibernate.Cfg.Configuration"/></returns>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.IConfigurationPersister.WriteConfiguration(System.String,NHibernate.Cfg.Configuration)">
+            <summary>
+            Writes the <see cref="T:NHibernate.Cfg.Configuration"/> to the file
+            </summary>
+            <param name="filename">The name of the file to write to</param>
+            <param name="cfg">The NH Configuration</param>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.IConfigurationPersister.IsNewConfigurationRequired(System.String,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Checks if a new <see cref="T:NHibernate.Cfg.Configuration"/> is required or a serialized one should be used.
+            </summary>
+            <param name="filename">Name of the file containing the NH configuration</param>
+            <param name="dependencies">Files that the serialized configuration depends on. </param>
+            <returns>If the <see cref="T:NHibernate.Cfg.Configuration"/> should be created or not.</returns>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.DefaultConfigurationPersister.ReadConfiguration(System.String)">
+            <summary>
+            Gets the <see cref="T:NHibernate.Cfg.Configuration"/> from the file.
+            </summary>
+            <param name="filename">The name of the file to read from</param>
+            <returns>The <see cref="T:NHibernate.Cfg.Configuration"/></returns>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.DefaultConfigurationPersister.WriteConfiguration(System.String,NHibernate.Cfg.Configuration)">
+            <summary>
+            Writes the <see cref="T:NHibernate.Cfg.Configuration"/> to the file
+            </summary>
+            <param name="filename">The name of the file to write to</param>
+            <param name="cfg">The NH Configuration</param>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.DefaultConfigurationPersister.IsNewConfigurationRequired(System.String,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Checks if a new <see cref="T:NHibernate.Cfg.Configuration"/> is required or a serialized one should be used.
+            </summary>
+            <param name="filename">Name of the file containing the NH configuration</param>
+            <param name="dependencies">Files that the serialized configuration depends on. </param>
+            <returns>If the <see cref="T:NHibernate.Cfg.Configuration"/> should be created or not.</returns>
+        </member>
         <member name="T:Castle.Facilities.NHibernateIntegration.Internal.DefaultSessionManager">
             <summary>
             
@@ -2268,6 +2326,11 @@
             </summary>
             <value></value>
         </member>
+        <member name="T:Castle.Facilities.NHibernateIntegration.Internal.Empty">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Castle.Facilities.NHibernateIntegration.Internal.FileAssemblyResource">
             <summary>
             Resource for a file or an assembly resource
@@ -2344,6 +2407,30 @@
             <exception cref="T:Castle.MicroKernel.Facilities.FacilityException">
             If the alias is not associated with a session factory
             </exception>
+        </member>
+        <member name="T:Castle.Facilities.NHibernateIntegration.Internal.PersistentConfigurationBuilder">
+            <summary>
+            Serializes the Configuration for subsequent initializations.
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.PersistentConfigurationBuilder.#ctor(Castle.Facilities.NHibernateIntegration.Internal.IConfigurationPersister)">
+            <summary>
+            Initializes the presistent <see cref="T:NHibernate.Cfg.Configuration"/> builder
+            with an specific <see cref="T:Castle.Facilities.NHibernateIntegration.Internal.IConfigurationPersister"/>
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.PersistentConfigurationBuilder.#ctor">
+            <summary>
+            Initializes the presistent <see cref="T:NHibernate.Cfg.Configuration"/> builder
+            using the default <see cref="T:Castle.Facilities.NHibernateIntegration.Internal.IConfigurationPersister"/>
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.PersistentConfigurationBuilder.GetConfiguration(Castle.Core.Configuration.IConfiguration)">
+            <summary>
+            Returns the Deserialized Configuration
+            </summary>
+            <param name="config">The configuration node.</param>
+            <returns>NHibernate Configuration</returns>
         </member>
         <member name="T:Castle.Facilities.NHibernateIntegration.Internal.ResourceAdapter">
             <summary>
@@ -3095,6 +3182,21 @@
             A transaction instance having the specified isolation level
             </returns>
         </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.SessionDelegate.CreateCriteria``1">
+            <summary>
+            Creates a new <c>Criteria</c> for the entity class.
+            </summary>
+            <typeparam name="T">The class to Query</typeparam>
+            <returns>An ICriteria object</returns>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.SessionDelegate.CreateCriteria``1(System.String)">
+            <summary>
+            Creates a new <c>Criteria</c> for the entity class with a specific alias
+            </summary>
+            <typeparam name="T">The class to Query</typeparam>
+            <param name="alias">The alias of the entity</param>
+            <returns>An ICriteria object</returns>
+        </member>
         <member name="M:Castle.Facilities.NHibernateIntegration.SessionDelegate.CreateCriteria(System.Type)">
             <summary>
             Creates a new <c>Criteria</c> for the entity class.
@@ -3345,6 +3447,32 @@
             just after the transaction completes
             </summary>
         </member>
+        <member name="T:Castle.Facilities.NHibernateIntegration.Internal.SessionFactoryActivator">
+            <summary>
+            Postpones the initiation of SessionFactory until Resolve
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.SessionFactoryActivator.#ctor(Castle.Core.ComponentModel,Castle.MicroKernel.IKernel,Castle.MicroKernel.ComponentInstanceDelegate,Castle.MicroKernel.ComponentInstanceDelegate)">
+            <summary>
+            Constructor for SessionFactoryActivator
+            </summary>
+            <param name="model"></param>
+            <param name="kernel"></param>
+            <param name="onCreation"></param>
+            <param name="onDestruction"></param>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.SessionFactoryActivator.RaiseCreatingSessionFactory">
+            <summary>
+            Calls the contributors
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Internal.SessionFactoryActivator.Create(Castle.MicroKernel.CreationContext)">
+            <summary>
+            Creates the <see cref="T:NHibernate.ISessionFactory"/> from the configuration
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
         <member name="T:Castle.Facilities.NHibernateIntegration.Internal.SessionFactoryResolver">
             <summary>
             Default implementation of <see cref="T:Castle.Facilities.NHibernateIntegration.Internal.ISessionFactoryResolver"/>
@@ -3434,6 +3562,23 @@
             
             </summary>
         </member>
+        <member name="F:Castle.Facilities.NHibernateIntegration.Constants.SessionFactoryConfiguration">
+            <summary>
+            Key at which the configuration for a specific SessionFactory is stored
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.NHibernateIntegration.IConfigurationContributor">
+            <summary>
+            Allows implementors to modify <see cref="T:NHibernate.Cfg.Configuration"/>
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.IConfigurationContributor.Process(System.String,NHibernate.Cfg.Configuration)">
+            <summary>
+            Modifies available <see cref="T:NHibernate.Cfg.Configuration"/> instances.
+            </summary>
+            <param name="name">Name of the session factory</param>
+            <param name="config">The config for sessionFactory</param>
+        </member>
         <member name="T:Castle.Facilities.NHibernateIntegration.NHibernateFacility">
             <summary>
             Provides a basic level of integration with the NHibernate project
@@ -3497,7 +3642,7 @@
             Registers the session factory resolver, the session store, the session manager and the transaction manager.
             </summary>
         </member>
-        <member name="M:Castle.Facilities.NHibernateIntegration.NHibernateFacility.RegisterConfigurationBuilder">
+        <member name="M:Castle.Facilities.NHibernateIntegration.NHibernateFacility.RegisterDefaultConfigurationBuilder">
             <summary>
             Register <see cref="T:Castle.Facilities.NHibernateIntegration.Internal.IConfigurationBuilder"/> the default ConfigurationBuilder or (if present) the one 
             specified via "configurationBuilder" attribute.

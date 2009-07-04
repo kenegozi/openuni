@@ -18,7 +18,7 @@ namespace OpenUni.Domain.Impl.Tests
 		[TestFixtureSetUp]
 		public void TestFixtureSetUp()
 		{
-			Enums.Initialise(typeof(Student).Assembly);
+			//Enums.Initialise(typeof(Student).Assembly);
 		}
 
 		[SetUp]

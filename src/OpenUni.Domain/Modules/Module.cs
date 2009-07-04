@@ -67,7 +67,7 @@ namespace OpenUni.Domain.Modules
 
 		public override string ToString()
 		{
-			return "{0} ({1}) - {2}".Apply(Name, Enums.GetDescriptionOf(moduleType), Id);
+			return "{0} ({1}) - {2}".Apply(Name, Enum<ModuleTypes>.GetDescriptionOf(moduleType), Id);
 		}
 	}
 }

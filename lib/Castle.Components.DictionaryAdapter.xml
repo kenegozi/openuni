@@ -413,6 +413,11 @@
             The type represented by T must be an interface with properties.
             </remarks>
         </member>
+        <member name="M:Castle.Components.DictionaryAdapter.DictionaryAdapterFactory.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Castle.Components.DictionaryAdapter.DictionaryAdapterFactory"/> class.
+            </summary>
+        </member>
         <member name="M:Castle.Components.DictionaryAdapter.DictionaryAdapterFactory.GetAdapter``1(System.Collections.IDictionary)">
             <summary>
             Gets a typed adapter bound to the <see cref="T:System.Collections.IDictionary"/>.

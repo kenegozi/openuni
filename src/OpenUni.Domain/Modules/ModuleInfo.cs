@@ -27,7 +27,7 @@ namespace OpenUni.Domain.Modules
 			Level = level;
 		}
 		public ModuleInfoHierarchical(int id, string name, string moduleType, int level)
-			:this(id, name, (ModuleTypes)moduleType.ToEnum<ModuleTypes>(),level)
+			:this(id, name, Enum<ModuleTypes>.From(moduleType),level)
 		{
 		}
 	}

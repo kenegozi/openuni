@@ -48,7 +48,7 @@ namespace OpenUni.Web.UI
 			container.AddFacility("MonoRailFacility", new MonoRailFacility());
 			container.AddFacility("LoggingFacility", new LoggingFacility(LoggerImplementation.Log4net));
 
-			Enums.Initialise(typeof(Student).Assembly);
+			//Enums.Initialise(typeof(Student).Assembly);
 
 			RegisterComponents();
 

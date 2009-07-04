@@ -34,6 +34,7 @@ namespace OpenUni.Domain.Impl.Tests
 			var session = factory.OpenSession();
 			NHibernate.Context.CurrentSessionContext.Bind(session);
 			var person = session.CreateQuery("from Person").SetMaxResults(1).UniqueResult<Person>();
+			Console.WriteLine(person.Id);
 			var moduleAvailability = session.CreateQuery("from ModuleAvailability ma").SetMaxResults(1).UniqueResult<ModuleAvailability>();
 			var reg = new ModuleRegistration(person, moduleAvailability);
 			repo.SaveRegistraion(reg);
