@@ -137,6 +137,8 @@ div.tech p:after
 	width		: 500px;
 	font-family	: Consolas;
 	font-size	: 12px;
+	height		: 400px;
+	overflow-y	: scroll;
 }
 #toggle-sql-log
 {
