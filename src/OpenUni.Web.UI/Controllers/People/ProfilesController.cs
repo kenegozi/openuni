@@ -8,7 +8,7 @@ using OpenUni.Web.UI.Views.Layouts;
 
 namespace OpenUni.Web.UI.Controllers.People
 {
-	[Layout(Layouts.DEFAULT)]
+	[Layout(Layouts.XHTML, Layouts.DEFAULT)]
 	[ControllerDetails(Area = "People")]
 	public partial class ProfilesController : AbstractController
 	{
