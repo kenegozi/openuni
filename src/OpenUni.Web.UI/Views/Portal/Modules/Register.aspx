@@ -92,16 +92,33 @@ data.push({
 				var form = $('#registration-form');
 				var url = form.attr('action');
 				var method = form.attr('method').toUpperCase();
-				var data = {
+				var registrationData = {
 					term: form.find('input[name=term]').val(),
 					year: form.find('input[name=year]').val(),
 					moduleId: form.find('input[name=moduleId]').val()
 				};
 				var options = {
 					url: url,
-					data: data,
+					data: registrationData,
 					type: method,
-					success: function(msg) { alert(msg); },
+					success: function(msg) {
+						alert('ההרשמה בוצעה בהצלחה');
+						var table = $('#module-options tbody');
+						$('input#moduleId').val('');
+						data = data.filter(function(item) {
+							return item.id != registrationData.moduleId;
+						});
+						$('tr', table).each(function() {
+							var $this = $(this);
+							var id = $this.find('td:first').text();
+							if (id == registrationData.moduleId) {
+								$this.next().remove();
+								$this.remove();
+							}
+						});
+						$('#module-options').show();
+						$('#registration-form').hide();
+					},
 					error: function(err) { alert('error: ' + err); }
 				};
 				$.ajax(options);
