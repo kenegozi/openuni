@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
+using NHibernate;
 using NHibernate.Transform;
 using OpenUni.Domain.Impl.Criteria;
 using OpenUni.Domain.Modules;
@@ -69,22 +70,23 @@ HAVING COUNT(mr.Id) < a.Capacity
 				.SetGuid("studentId", studentId)
                 .SetInt32("year", year)
                 .SetByte("term", term)
+				.SetCacheable(true)
 				.List<object[]>();
         }
 
-		public IEnumerable<Module> AllFor(Person person)
+		public IEnumerable<ModuleRegistration> AllFor(Person person)
 		{
 			var q = @"
-				select m
+				select r
 				from ModuleRegistration r
-					join r.ModuleAvailability a
-					join a.Module m
+					join fetch r.ModuleAvailability a
+					join fetch a.Module m
 				where r.Student = :person
 				
 			";
 			return Session.CreateQuery(q)
 				.SetEntity("person", person)
-				.List<Module>();
+				.List<ModuleRegistration>();
 		}
 
 		private static readonly ConstructorInfo HierarchicalModuleInfoCtor =

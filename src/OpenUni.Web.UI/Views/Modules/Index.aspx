@@ -1,6 +1,12 @@
 ﻿<%@ Page Language="C#" Inherits="OpenUni.Web.UI.Views.View<IIndexView>" %>
 <%@ Import Namespace="OpenUni.Web.UI.Views.Modules"%>
 <%@ Import Namespace="OpenUni.Web.UI.Views.Layouts"%>
+<div class="breadcrumbs">
+איפה אני? 
+<a href="~/">דף הבית</a>
+-&gt;
+<a href="~<%=Routes.Modules()%>">קורסים</a>
+</div>
 
 <form method="get" action="">
 	<div>

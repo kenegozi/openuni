@@ -27,11 +27,20 @@ namespace OpenUni.Domain.People
 		private const string FULL_NAME_FORMAT = "{0} {1}";
 		private const string FULL_NAME_WITH_TITLE_FORMAT = "{2} {0} {1}";
 
+		string GetComputedTitle()
+		{
+			if (Title.IsNullOrEmpty()==false)
+				return Title;
+			if (this is Professor)
+				return "פרופ'";
+			return null;
+		}
+
 		public virtual string FullName
 		{
 			get
 			{
-				var format = Title.IsNullOrEmpty()
+				var format = GetComputedTitle().IsNullOrEmpty()
 					? FULL_NAME_FORMAT
 					: FULL_NAME_WITH_TITLE_FORMAT;
 

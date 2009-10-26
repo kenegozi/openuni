@@ -11,6 +11,12 @@ namespace OpenUni.Web.UI.Controllers
 	[Filter(ExecuteWhen.AfterAction, typeof(DefaultLayoutCommonFilter))]
 	public abstract class AbstractController : SmartDispatcherController
 	{
+		protected override object InvokeMethod(System.Reflection.MethodInfo method, IRequest request, System.Collections.Generic.IDictionary<string, object> extraArgs)
+		{
+			var result = base.InvokeMethod(method, request, extraArgs);
+			PropertyBag["Person"] = Session["Person"];
+			return result;
+		}
 		public IDictionaryAdapterFactory DictionaryAdapterFactory
 		{
 			get;

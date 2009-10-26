@@ -37,6 +37,35 @@ using IFilter=Castle.MonoRail.Framework.IFilter;
 
 namespace OpenUni.Web.UI
 {
+	public class SqlLogFilter : IViewFilter
+	{
+		public static readonly string SQL_LOG_PLACEHOLDER = "SQL_LOG_PLACEHOLDER";
+		public static readonly string SQL_LOG_WRITER_KEY = "SQL_LOG_WRITER_KEY";
+
+		public string ApplyOn(string input)
+		{
+			var log = "";
+			var writer = HttpContext.Current.Items[SQL_LOG_WRITER_KEY] as StringWriter;
+			if (writer != null)
+			{
+				var lines = writer.ToString().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+				var relevantLines =
+					lines.Where(l => l.StartsWith("NHibernate") || l.Length > 0 && char.IsWhiteSpace(l[0])).ToArray()
+					;
+				var queries = string.Join(Environment.NewLine, relevantLines)
+					.Split(new[] {"NHibernate:"}, StringSplitOptions.RemoveEmptyEntries)
+					.Select(q => q.Trim());
+				log = queries
+					.Select(q => "<pre>" + q + "</pre>")
+					.Aggregate("", (q1, q2) => q1 + q2);
+				var count = queries.Count();
+				log = "<p>Queries: " + count + "</p>" + log;
+			}
+
+			return input.Replace(SQL_LOG_PLACEHOLDER, log);
+		}
+	}
+
 	public class Global : HttpApplication, IMonoRailConfigurationEvents, IContainerAccessor
 	{
 		private static WindsorContainer container;
@@ -160,6 +189,8 @@ namespace OpenUni.Web.UI
 
 		protected void Application_EndRequest(object sender, EventArgs e)
 		{
+
+
 			if (ManagedWebSessionContext.HasBind(Context, sessionFactory) == false)
 				return;
 			var session = sessionFactory.GetCurrentSession();// Context.Items[SESSION_KEY] as ISession;
@@ -174,6 +205,10 @@ namespace OpenUni.Web.UI
 
 		protected void Application_BeginRequest(object sender, EventArgs e)
 		{
+			var writer = new StringWriter();
+			Console.SetOut(writer);
+			Context.Items[SqlLogFilter.SQL_LOG_WRITER_KEY] = writer;
+
 			SetSqlLogging();
 
 			SetIsraelCulture();
@@ -255,6 +290,14 @@ namespace OpenUni.Web.UI
 		public T Create()
 		{
 			return factoryMethod();
+		}
+	}
+
+	internal class NhStringWriter : StringWriter
+	{
+		public override void Write(string value)
+		{
+			base.Write(value);
 		}
 	}
 }

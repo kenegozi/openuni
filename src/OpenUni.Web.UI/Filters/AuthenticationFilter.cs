@@ -39,6 +39,7 @@ namespace OpenUni.Web.UI.Filters
 			if (user == null || MatchRequestedRole(user) == false)
 				return RedirectToLoginPage(context);
 
+			controllerContext.PropertyBag["Person"] = user;
 			return true;
 		}
 

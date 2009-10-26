@@ -1,6 +1,12 @@
 ﻿
 <%@ Page Language="C#" Inherits="OpenUni.Web.UI.Views.View<IIndexView>" %>
 <%@ Import Namespace="OpenUni.Web.UI.Views.Home"%>
+<div class="breadcrumbs">
+איפה אני? 
+<a href="~/">דף הבית</a>
+-&gt;
+<a href="~<%=Routes.about()%>">אודות</a>
+</div>
 <div id="about">
 <p>אתר המדגים מערכת ניהול לאוניברסיטה</p>
 <p>	נכתב על ידי חן אגוזי, עבור  סדנה בבסיסי נתונים (מס' קורס 20563) באוניברסיטה הפתוחה</p>

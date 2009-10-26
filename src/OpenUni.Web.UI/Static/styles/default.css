@@ -129,17 +129,6 @@ div.tech p:after
 	content	: ":";
 }
 
-#sql-log
-{
-	position	: fixed;
-	background-color : Silver;
-	border		: 1px solid black;
-	width		: 500px;
-	font-family	: Consolas;
-	font-size	: 12px;
-	height		: 400px;
-	overflow-y	: scroll;
-}
 #toggle-sql-log
 {
 	position	: fixed;
@@ -179,3 +168,51 @@ table#module-options tr:hover td
 	cursor			: pointer;
 }
 
+
+.Covering
+{
+	position	: fixed;
+	left		: 0;
+	top			: 0;
+	height		: 100%;
+	width		: 100%;
+}
+#sqlLogBlocker
+{
+	background-color:#DDDDDD;
+	opacity		: 0.5;
+}
+#sqlLogWrapper
+{
+}
+#sqlLog
+{
+	width		: 500px;
+	height		: 400px;
+	overflow	: scroll;
+	margin		: 0 auto;
+	top			: 100px;
+	background	: #FFF;	
+}
+#sqlLog pre
+{
+	margin		: 5px 0 0 0;
+	padding		: 5px 0 0 0;
+	border-top	: 1px dotted #CCC;
+	height		: 16px;
+	overflow	: hidden;
+	font-family	: Consolas;
+	font-size	: 12px;
+}
+#sqlLog pre.UnCollapsed
+{
+	height		: auto;
+}
+#sqlLog pre:before
+{
+	content:'+ '
+}
+#sqlLog pre.UnCollapsed:before
+{
+	content:'- '
+}

@@ -144,6 +144,7 @@
     <Content Include="Views\Layouts\LoginBox.aspx" />
     <Content Include="Views\Layouts\Portal.aspx" />
     <Content Include="Views\Layouts\Default.aspx" />
+    <Content Include="Views\Login\ChooseRole.aspx" />
     <Content Include="Views\Login\Login.aspx" />
     <Content Include="Views\Modules\Index.aspx" />
     <Content Include="Views\Modules\Show.aspx" />
@@ -180,6 +181,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Authentication\IFormsAuthentication.cs" />
+    <Compile Include="Services\Term.cs" />
     <Compile Include="SiteMaps\SiteMap.MonoRail.generated.cs" />
     <Compile Include="Views\Departments\IDepartmentShowView.cs">
       <SubType>Code</SubType>
@@ -197,6 +199,7 @@
     <Compile Include="Views\Layouts\Layouts.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\Login\IChooseRoleView.cs" />
     <Compile Include="Views\Login\ILoginView.cs" />
     <Compile Include="Views\Modules\IIndexView.cs">
       <SubType>Code</SubType>

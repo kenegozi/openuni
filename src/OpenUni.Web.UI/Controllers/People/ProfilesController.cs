@@ -29,7 +29,7 @@ namespace OpenUni.Web.UI.Controllers.People
 				return;
 			}
 
-			PropertyBag["Person"] = person;
+			PropertyBag["PersonToShow"] = person;
 
 			MyViews.Person.Render();
 

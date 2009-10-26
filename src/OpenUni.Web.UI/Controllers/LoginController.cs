@@ -66,21 +66,64 @@ namespace OpenUni.Web.UI.Controllers
 			formsAuthentication.SignOut();
 			formsAuthentication.SetAuthenticationCookie(person.Username);
 
-			if (string.IsNullOrEmpty(returnUrl))
-				RedirectUserToDefaultPage(person);
-			else
+			if (string.IsNullOrEmpty(returnUrl) == false)
+			{
 				RedirectToUrl(returnUrl);
+				return;
+			}
+			MyActions.ChooseRole().Redirect();
 		}
 
-		void RedirectUserToDefaultPage(Person person)
+		[PatternRoute("Logout", "login/logout")]
+		public void Logout()
 		{
+			formsAuthentication.SignOut();
+			Session["Person"] = null;
 			RedirectToUrl("/");
-			return;
-			if (person.IsInRole(Roles.Staff))
+		}
+
+		[AccessibleThrough(Verb.Post)]
+		[PatternRoute("Login_ChooseRole", "login/chooserole")]
+		public void ChooseRole(Roles role)
+		{
+			var person = (Person)Session["Person"];
+			if (person.IsInRole(role) == false)
 			{
-				//RedirectToStaffMemberPanel
-				return;				
+				RedirectToReferrer();
+				return;
 			}
+			if (RedirectByRole(role))
+				return;
+
+			RedirectToReferrer();
+		}
+
+		public void ChooseRole()
+		{
+			var person = (Person)Session["Person"];
+			if (RedirectByRole(person.Roles))
+				return;
+			PropertyBag["Person"] = person;
+		}
+
+		bool RedirectByRole(Roles role)
+		{
+			if (role == Roles.Staff)
+			{
+				RedirectToUrl("/");
+				return true;
+			}
+			if (role == Roles.Admin)
+			{
+				RedirectToUrl("/");
+				return true;
+			}
+			if (role == Roles.Student)
+			{
+				Site.Portal.Home.Index().Redirect();
+				return true;
+			}
+			return false;
 		}
 
 		void TryAgain(string returnUrl, int icn, string username)

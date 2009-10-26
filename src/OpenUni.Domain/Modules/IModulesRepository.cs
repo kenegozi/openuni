@@ -33,7 +33,7 @@ namespace OpenUni.Domain.Modules
 		/// <returns>module infos</returns>
 		IEnumerable<object[]> AllFor(int year, byte term, Guid studentId);
 
-        IEnumerable<Module> AllFor(Person person);
+		IEnumerable<ModuleRegistration> AllFor(Person person);
 
         IEnumerable<ModuleInfoHierarchical> AllPrerequisitesFor(int id);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework.Config;
 using D9.Commons;
@@ -27,6 +28,31 @@ namespace OpenUni.Domain.Impl.Tests
 			ActiveRecordStarter.Initialize(typeof(Student).Assembly, ActiveRecordSectionHandler.Instance);
 
 			session = ActiveRecordMediator.GetSessionFactoryHolder().CreateSession(typeof(Student));
+		}
+
+		[Test]
+		public void Grades()
+		{
+			var s = ActiveRecordMediator.GetSessionFactoryHolder().GetSessionFactory(typeof(Student)).OpenStatelessSession();
+			var studentId = new Guid("EF685734-A01B-42B3-85FF-BAA62A6F937C");
+			var regIds = s.CreateQuery(@"
+select mr.Id from ModuleRegistration mr
+where mr.Student.Id = :studentId
+")
+ .SetGuid("studentId", studentId)
+ .List<Guid>();
+			var rand = new Random();
+			Func<int> randInt = () => rand.Next(51, 101);
+			Func<Guid, string> update = id => "UPDATE ModuleRegistrations SET Grade= " + randInt() + " WHERE Id='" + id + "';";
+			var actions = new StringBuilder();
+			foreach (var id in regIds)
+			{
+				actions.AppendLine(update(id));
+			}
+
+			var cmd = s.Connection.CreateCommand();
+			cmd.CommandText = actions.ToString();
+			cmd.ExecuteNonQuery();
 		}
 
 		[Test]

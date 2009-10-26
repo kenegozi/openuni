@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="OpenUni.Web.UI.Views.View<IDefaultLayout>" %>
+<%@ Import Namespace="OpenUni.Web.UI"%>
 
 <%@ Import Namespace="OpenUni.Web.UI.Controllers" %>
 <%@ Import Namespace="OpenUni.Web.UI.Views.Layouts" %>
@@ -12,6 +13,7 @@
 	<link rel="Stylesheet" type="text/css" href="~/static/js/jquery/css/smoothness/jquery-ui-1.7.1.custom.css" />
 	<link rel="Stylesheet" type="text/css" href="~/static/js/jquery/jquery.ui.autocomplete.css" />
 </head>
+<%StartFiltering(new SqlLogFilter()); %>
 <body>
 	<div class="rtl">
 		<div id="canvas">
@@ -31,6 +33,10 @@
 			</div>
 		</div>
 	</div>
+	<div id="sqlLogBlocker" class="Covering"></div>
+	<div id="sqlLogWrapper" class="Covering">
+		<div id="sqlLog"><%=SqlLogFilter.SQL_LOG_PLACEHOLDER %></div>
+	</div>
 	<div id="sql-log" class="jqmWindow">
 		loading ...</div>
 	<div id="toggle-sql-log">
@@ -46,14 +52,22 @@
 	<script type="text/javascript" src="~/static/js/jquery/jquery.ui.autocomplete.ext.js"></script>
 	<script type="text/javascript" src="~/static/js/jquery/jquery.ui.autocomplete.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
+		$(function() {
 			$('ul.jd_menu').jdMenu();
 		});
 
-		$(document).ready(function() {
-			$('div#sql-log').hide();
-			$('div#sql-log').jqm({
-				ajax: '~/sql-log/<%=RequestId %>', trigger: 'div#toggle-sql-log'
+		$(function() {
+			$('.Covering').hide();
+			$('div#toggle-sql-log').click(function() {
+				$('.Covering').show();
+			});
+
+			$('.Covering').click(function(ev) {
+				if (ev.target.className !== 'Covering') return;
+				$('.Covering').hide();
+			});
+			$('#sqlLog pre').click(function() {
+				$(this).toggleClass('UnCollapsed');
 			});
 		});
 		/*		
@@ -84,4 +98,5 @@
 	</script>
 <%=Properties["CaptureForEndOfBody"]%>
 </body>
+<%EndFiltering(); %>
 </html>

@@ -1,6 +1,13 @@
 ﻿<%@ Page Language="C#" Inherits="OpenUni.Web.UI.Views.View<IModuleView>" %>
 <%@ Import Namespace="OpenUni.Web.UI.Views.Modules"%>
-
+<div class="breadcrumbs">
+איפה אני? 
+<a href="~/">דף הבית</a>
+-&gt;
+<a href="~<%=Routes.Modules()%>">קורסים</a>
+-&gt;
+<a href="~<%=Routes.ModuleById(view.Module.Id, view.Module.Name)%>"><%=view.Module.Name %></a>
+</div>
 <div class="module-details">
 	<h3><%=view.Module.Name %> (<%=view.Module.Id %>)</h3>
 	<p>

@@ -9,8 +9,8 @@ namespace OpenUni.Domain.Modules
 	[ActiveRecord]
 	public class ModuleRegistration
 	{
-		Person student;
-		ModuleAvailability moduleAvailability;
+		readonly Person student;
+		readonly ModuleAvailability moduleAvailability;
 
 		protected ModuleRegistration()
 		{
@@ -37,5 +37,7 @@ namespace OpenUni.Domain.Modules
 			get { return moduleAvailability; }
 		}
 
+		[Property]
+		public virtual byte? Grade { get; set; }
 	}
 }

@@ -7,6 +7,7 @@ using Castle.Tools.CodeGenerator.External;
 using OpenUni.Domain.Modules;
 using OpenUni.Domain.People;
 using OpenUni.Web.UI.Filters;
+using OpenUni.Web.UI.Services;
 using OpenUni.Web.UI.Views.Layouts;
 
 namespace OpenUni.Web.UI.Controllers.Portal
@@ -33,7 +34,13 @@ namespace OpenUni.Web.UI.Controllers.Portal
 		public void MyModules()
 		{
 			var person = Session["Person"] as Person;
-			PropertyBag["MyModules"] = modulesRepository.AllFor(person);
+			//PropertyBag["MyModules"] = modulesRepository.AllFor(person);
+			PropertyBag["MyModules"] = from mr in modulesRepository.AllFor(person)
+			              group mr by new Term(mr.ModuleAvailability.Year, mr.ModuleAvailability.TermNo)
+			              into mByT 
+						  orderby mByT.Key descending 
+						  select mByT;
+
 		}
 
 		[AccessibleThrough(Verb.Post)]
@@ -80,12 +87,7 @@ namespace OpenUni.Web.UI.Controllers.Portal
 				});
 			PropertyBag["Year"] = year;
 			PropertyBag["Term"] = term;
-			PropertyBag["TermString"] = GetTermString(year, term);
-		}
-
-		private string GetTermString(int year, byte term)
-		{
-			return "" + year + (char)('א' + (term - 1));
+			PropertyBag["TermString"] = new Term(year, term);
 		}
 
 		KeyValuePair<int, byte> GetNext(KeyValuePair<int, byte> current)
