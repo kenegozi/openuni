@@ -79,6 +79,7 @@ namespace OpenUni.Web.UI.Controllers
 		{
 			formsAuthentication.SignOut();
 			Session["Person"] = null;
+			Response.RemoveCookie("uid");
 			RedirectToUrl("/");
 		}
 

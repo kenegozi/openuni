@@ -2,29 +2,33 @@ using System;
 using System.Collections.Specialized;
 using Castle.MonoRail.Framework;
 using OpenUni.Domain.People;
+using OpenUni.Web.UI.Services.Authentication;
 using OpenUni.Web.UI.SiteMap;
 
 namespace OpenUni.Web.UI.Filters
 {
 	public abstract class AuthenticationFilterAttribute : FilterAttribute
 	{
-		protected AuthenticationFilterAttribute(Type filterType):base(ExecuteWhen.BeforeAction, filterType) {}
+		protected AuthenticationFilterAttribute(Type filterType) : base(ExecuteWhen.BeforeAction, filterType) { }
 	}
 	public class AdminsOnlyAttribute : AuthenticationFilterAttribute
 	{
-		public AdminsOnlyAttribute() : base(typeof(AdminsOnlyFilter))
+		public AdminsOnlyAttribute()
+			: base(typeof(AdminsOnlyFilter))
 		{
 		}
 	}
 	public class StaffMembersOnlyAttribute : AuthenticationFilterAttribute
 	{
-		public StaffMembersOnlyAttribute() : base(typeof(StaffMembersOnlyFilter))
+		public StaffMembersOnlyAttribute()
+			: base(typeof(StaffMembersOnlyFilter))
 		{
 		}
 	}
 	public class StudentsOnlyAttribute : AuthenticationFilterAttribute
 	{
-		public StudentsOnlyAttribute() : base(typeof(StudentsOnlyFilter))
+		public StudentsOnlyAttribute()
+			: base(typeof(StudentsOnlyFilter))
 		{
 		}
 	}
@@ -32,18 +36,22 @@ namespace OpenUni.Web.UI.Filters
 	public abstract class AuthenticationFilter : IFilter
 	{
 		public IPeopleRepository PeopleRepository { get; set; }
+		public IFormsAuthentication FormsAuthentication { get; set; }
+
 		protected abstract Roles RequestedRoles { get; }
 		public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
 		{
 			var user = context.Session["Person"] as Person;
 
-			if (user==null)
+			if (user == null)
 			{
 				var uidInCookie = context.Request.ReadCookie("uid");
-				if (string.IsNullOrEmpty(uidInCookie) == false )
+				if (string.IsNullOrEmpty(uidInCookie) == false)
 				{
 					user = PeopleRepository.GetBy(new Guid(uidInCookie));
 					context.Session["Person"] = user;
+					FormsAuthentication.SignOut();
+					FormsAuthentication.SetAuthenticationCookie(user.Username);
 				}
 			}
 
@@ -61,7 +69,7 @@ namespace OpenUni.Web.UI.Filters
 
 		static bool RedirectToLoginPage(IEngineContext context)
 		{
-			context.Response.Redirect("", "Login", "Login", new {ReturnUrl = context.Request.Url});
+			context.Response.Redirect("", "Login", "Login", new { ReturnUrl = context.Request.Url });
 			return false;
 		}
 
