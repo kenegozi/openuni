@@ -62,7 +62,7 @@ namespace OpenUni.Web.UI.Controllers
 			}
 
 			Session["Person"] = person;
-
+			Response.CreateCookie("uid", person.Id.ToString());
 			formsAuthentication.SignOut();
 			formsAuthentication.SetAuthenticationCookie(person.Username);
 

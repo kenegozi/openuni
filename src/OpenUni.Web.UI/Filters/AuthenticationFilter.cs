@@ -31,10 +31,21 @@ namespace OpenUni.Web.UI.Filters
 
 	public abstract class AuthenticationFilter : IFilter
 	{
+		public IPeopleRepository PeopleRepository { get; set; }
 		protected abstract Roles RequestedRoles { get; }
 		public bool Perform(ExecuteWhen exec, IEngineContext context, IController controller, IControllerContext controllerContext)
 		{
 			var user = context.Session["Person"] as Person;
+
+			if (user==null)
+			{
+				var uidInCookie = context.Request.ReadCookie("uid");
+				if (string.IsNullOrEmpty(uidInCookie) == false )
+				{
+					user = PeopleRepository.GetBy(new Guid(uidInCookie));
+					context.Session["Person"] = user;
+				}
+			}
 
 			if (user == null || MatchRequestedRole(user) == false)
 				return RedirectToLoginPage(context);
