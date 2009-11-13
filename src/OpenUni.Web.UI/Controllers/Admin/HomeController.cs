@@ -1,30 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
-
+using System.Linq;
 using Castle.MonoRail.Framework;
-using Castle.MonoRail.Framework.Routing;
-using Castle.Tools.CodeGenerator.External;
-using OpenUni.Web.UI.Filters;
+using OpenUni.Domain.Modules;
+using OpenUni.Domain.People;
 using OpenUni.Web.UI.Views.Layouts;
-using System.Web;
 
 namespace OpenUni.Web.UI.Controllers.Admin
 {
-	[AdminsOnly]
-	[ControllerDetails(Area = "Admin")]
-	public abstract class AbstractAdminController : AbstractController
-	{
-		
-	}
 	[Layout(Layouts.DEFAULT)]
-	public partial class HomeController : AbstractAdminController
+	public class HomeController : AbstractAdminController
 	{
-		public void Index()
+		private readonly IModulesRepository _modulesRepository;
+
+		public HomeController(IModulesRepository modulesRepository)
 		{
-			RenderText("Admin homepage");
+			_modulesRepository = modulesRepository;
 		}
 
+		public void Index()
+		{
+			var person = Session["Person"] as Professor;
+
+			var moduleAvailability = _modulesRepository.ModulesForDirector(2009, 1, person.Id);
+			var s = moduleAvailability.Select(ma => ma.Module.Name).Aggregate("", (a1, a2) => a1 + "<br/>" + a2);
+			RenderText(s);
+		}
 	}
 }

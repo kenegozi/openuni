@@ -70,31 +70,6 @@
 				$(this).toggleClass('UnCollapsed');
 			});
 		});
-		/*		
-		$('#toggle-sql-log').click(function() {
-			
-		var body = $(document.body);
-		var bodyDimensions = {
-		width	: body.innerWidth(),
-		height	: body.innerHeight()
-		};
-			
-		var sqlLog = $('div#sql-log');
-		var logDimensions = {
-		width	: sqlLog.outerWidth(),
-		height	: sqlLog.outerHeight()
-		};
-			
-		var top = (bodyDimensions.height - logDimensions.height) / 2;
-		if ( top < 0 ) top = 0;
-			
-		var left = (bodyDimensions.width - logDimensions.width) / 2;
-			
-		sqlLog
-		.css({top : top, left: left})
-		.show();
-		});
-		*/
 	</script>
 <%=Properties["CaptureForEndOfBody"]%>
 </body>

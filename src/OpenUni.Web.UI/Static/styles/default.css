@@ -171,6 +171,7 @@ table#module-options tr:hover td
 
 .Covering
 {
+	display		: none;
 	position	: fixed;
 	left		: 0;
 	top			: 0;
@@ -210,9 +211,10 @@ table#module-options tr:hover td
 }
 #sqlLog pre:before
 {
-	content:'+ '
+	cursor	: pointer;
+	content	: '+ '
 }
 #sqlLog pre.UnCollapsed:before
 {
-	content:'- '
+	content : '- '
 }

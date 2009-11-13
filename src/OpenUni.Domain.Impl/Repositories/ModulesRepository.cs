@@ -74,6 +74,23 @@ HAVING COUNT(mr.Id) < a.Capacity
 				.List<object[]>();
         }
 
+		public ModuleAvailability[] ModulesForDirector(int year, byte term, Guid directorId)
+		{
+			return
+				Session.CreateQuery(
+					@"
+from ModuleAvailability ma
+where	ma.Module.Director.Id = :directorId
+	and	ma.Year = :year
+	and ma.TermNo = :term
+")
+					.SetEntity("directorId", directorId)
+					.SetInt32("year", year)
+					.SetByte("term", term)
+					.List<ModuleAvailability>()
+					.ToArray();
+		}
+
 		public IEnumerable<ModuleRegistration> AllFor(Person person)
 		{
 			var q = @"
