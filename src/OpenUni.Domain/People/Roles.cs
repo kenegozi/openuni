@@ -5,8 +5,7 @@ namespace OpenUni.Domain.People
 	[Flags]
 	public enum Roles
 	{
-		Admin = 1,
-		Student = 2,
-		Staff = 4,
+		Student = 1,
+		Staff = 2,
 	}
 }

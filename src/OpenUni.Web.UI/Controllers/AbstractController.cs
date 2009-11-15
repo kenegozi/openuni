@@ -1,3 +1,5 @@
+using System;
+using System.Web;
 using Castle.Components.DictionaryAdapter;
 using Castle.MonoRail.Framework;
 using Castle.Tools.CodeGenerator.External;
@@ -13,6 +15,9 @@ namespace OpenUni.Web.UI.Controllers
 	{
 		protected override object InvokeMethod(System.Reflection.MethodInfo method, IRequest request, System.Collections.Generic.IDictionary<string, object> extraArgs)
 		{
+			Response.CachePolicy.SetCacheability(HttpCacheability.NoCache);
+			Response.CachePolicy.SetExpires(DateTime.Now.AddYears(-1));
+			Response.CachePolicy.SetNoStore();
 			var result = base.InvokeMethod(method, request, extraArgs);
 			PropertyBag["Person"] = Session["Person"];
 			return result;

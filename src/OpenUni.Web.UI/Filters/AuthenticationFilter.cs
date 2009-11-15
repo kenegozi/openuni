@@ -11,13 +11,6 @@ namespace OpenUni.Web.UI.Filters
 	{
 		protected AuthenticationFilterAttribute(Type filterType) : base(ExecuteWhen.BeforeAction, filterType) { }
 	}
-	public class AdminsOnlyAttribute : AuthenticationFilterAttribute
-	{
-		public AdminsOnlyAttribute()
-			: base(typeof(AdminsOnlyFilter))
-		{
-		}
-	}
 	public class StaffMembersOnlyAttribute : AuthenticationFilterAttribute
 	{
 		public StaffMembersOnlyAttribute()
@@ -73,13 +66,6 @@ namespace OpenUni.Web.UI.Filters
 			return false;
 		}
 
-	}
-	public class AdminsOnlyFilter : AuthenticationFilter
-	{
-		protected override Roles RequestedRoles
-		{
-			get { return Roles.Admin; }
-		}
 	}
 	public class StaffMembersOnlyFilter : AuthenticationFilter
 	{

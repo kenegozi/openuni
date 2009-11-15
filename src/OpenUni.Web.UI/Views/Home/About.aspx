@@ -33,10 +33,10 @@
 </div>
 
 <div class="tech">
-	<p>Data Access</p>
+	<p>Data Access and OR/M</p>
 	<ul>
 		<li><a href="http://www.nhforge.org">NHibernate 2.1</a></li>
-		<li><a href="http://en.wikipedia.org/wiki/Language_Integrated_Query">Linq for NHibernate</a></li>
+		<li><a href="http://www.castleproject.org/activerecord/index.html">Castle ActiveRecord</a></li>
 	</ul>
 </div>
 

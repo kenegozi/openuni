@@ -42,9 +42,14 @@ where	ma.Module = :module
 		{
 			using (var tx = Session.BeginTransaction())
 			{
-				Session.Save(registration);
+				Session.SaveOrUpdate(registration);
 				tx.Commit();
 			}
+		}
+
+		public ModuleRegistration GetRegistraionBy(Guid id)
+		{
+			return Session.Load<ModuleRegistration>(id);
 		}
 
 		public IEnumerable<object[]> AllFor(int year, byte term, Guid studentId)
@@ -84,7 +89,7 @@ where	ma.Module.Director.Id = :directorId
 	and	ma.Year = :year
 	and ma.TermNo = :term
 ")
-					.SetEntity("directorId", directorId)
+					.SetGuid("directorId", directorId)
 					.SetInt32("year", year)
 					.SetByte("term", term)
 					.List<ModuleAvailability>()
@@ -103,6 +108,23 @@ where	ma.Module.Director.Id = :directorId
 			";
 			return Session.CreateQuery(q)
 				.SetEntity("person", person)
+				.List<ModuleRegistration>();
+		}
+
+		public IEnumerable<ModuleRegistration> AllFor(Module m, int year, byte termNo)
+		{
+			var q = @"
+				select r
+				from ModuleRegistration r
+					join fetch r.Student s
+					join r.ModuleAvailability a
+				where a.Module = :m and a.Year = :year and a.TermNo = :termNo
+				
+			";
+			return Session.CreateQuery(q)
+				.SetEntity("m", m)
+				.SetInt32("year", year)
+				.SetByte("termNo", termNo)
 				.List<ModuleRegistration>();
 		}
 

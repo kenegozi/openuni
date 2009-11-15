@@ -111,12 +111,7 @@ namespace OpenUni.Web.UI.Controllers
 		{
 			if (role == Roles.Staff)
 			{
-				RedirectToUrl("/");
-				return true;
-			}
-			if (role == Roles.Admin)
-			{
-				RedirectToUrl("/");
+				RedirectToUrl("/admin/home/index");
 				return true;
 			}
 			if (role == Roles.Student)

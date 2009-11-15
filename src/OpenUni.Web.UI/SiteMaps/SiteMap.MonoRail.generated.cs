@@ -825,6 +825,13 @@ namespace OpenUni.Web.UI.SiteMap {
                 return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.ModulesController), "", "Modules", "Show");
             }
         }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public virtual Castle.Tools.CodeGenerator.External.IControllerViewReference Students {
+            get {
+                return this._services.ControllerReferenceFactory.CreateViewReference(this._services, typeof(OpenUni.Web.UI.Controllers.ModulesController), "", "Modules", "Students");
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Castle.Tools.CodeGenerator", "0.2")]

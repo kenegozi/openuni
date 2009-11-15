@@ -133,6 +133,9 @@
     <Content Include="Static\js\jquery\jquery.ui.autocomplete.js" />
     <Content Include="Static\js\jquery\jquery.validate.min.js" />
     <Content Include="Static\styles\default.css" />
+    <Content Include="Views\Admin\Home\Index.aspx" />
+    <Content Include="Views\Admin\Modules\Students.aspx" />
+    <Content Include="Views\Admin\Modules\Index.aspx" />
     <Content Include="Views\Departments\Index.aspx" />
     <Content Include="Views\Departments\Show.aspx" />
     <Content Include="Views\Errors\Error404.aspx" />
@@ -164,6 +167,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\Admin\AbstractAdminController.cs" />
+    <Compile Include="Controllers\Admin\ModulesController.cs" />
     <Compile Include="Controllers\Admin\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
@@ -184,6 +188,9 @@
     <Compile Include="Services\Authentication\IFormsAuthentication.cs" />
     <Compile Include="Services\Term.cs" />
     <Compile Include="SiteMaps\SiteMap.MonoRail.generated.cs" />
+    <Compile Include="Views\Admin\Home\IIndexView.cs" />
+    <Compile Include="Views\Admin\Modules\IStudentsView.cs" />
+    <Compile Include="Views\Admin\Modules\IIndexView.cs" />
     <Compile Include="Views\Departments\IDepartmentShowView.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -225,9 +232,6 @@
       <Project>{565DC891-2A00-41C4-AFDE-618A21338577}</Project>
       <Name>OpenUni.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

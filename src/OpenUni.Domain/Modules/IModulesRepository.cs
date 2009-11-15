@@ -41,10 +41,13 @@ namespace OpenUni.Domain.Modules
 
 		IEnumerable<ModuleRegistration> AllFor(Person person);
 
-        IEnumerable<ModuleInfoHierarchical> AllPrerequisitesFor(int id);
+    	IEnumerable<ModuleRegistration> AllFor(Module m, int year, byte termNo);
+
+		IEnumerable<ModuleInfoHierarchical> AllPrerequisitesFor(int id);
 
 		ModuleAvailability GetAvailabilityOf(Module module, int year, byte term);
 
 		void SaveRegistraion(ModuleRegistration registration);
+    	ModuleRegistration GetRegistraionBy(Guid guid);
     }
 }

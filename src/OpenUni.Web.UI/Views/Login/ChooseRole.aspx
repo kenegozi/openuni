@@ -15,11 +15,6 @@
 		<label for="role_staff">סגל אקדמי</label>
 		<br />
 	<%} %>
-	<%if (view.Person.IsInRole(OpenUni.Domain.People.Roles.Admin)) {%>
-		<input type="radio" name="role" id="role_admin" value="<%=OpenUni.Domain.People.Roles.Admin %>"/>
-		<label for="role_admin">סגל ניהולי</label>
-		<br />
-	<%} %>
 		<input type="submit" value="כניסה" />
 	</form>
 </div>
